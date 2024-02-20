@@ -4,46 +4,27 @@
 
 Lattice::Lattice(int size){
   this->size = size;
-  // Reserva de memoria dinamica de (nrows_ + 2) vectores de celulas y cada
-  // uno de ellos realiza lo mismo con (ncols_ + 2), para inicializar toda la
-  // matriz a muerta y ademas tener un borde contra desbordamientos
-  this->lattice = new Cell[size + 2];
-  for (int i = 0; i < size + 2; i++) {   
-    lattice[i] = new State(new Position(i));
-    latti
+  this->lattice = new Cell[size];
+  for (int i = 0; i < size; i++) {   
+    Position position(i);
+    State state(0);  
+    lattice[i] = Cell(position, state);      
   } 
+  Position middle(size/2);
+  State iniState(1);
+  lattice[size/2] = Cell(middle, iniState);
 }
 
-// Muestra por pantalla la rejilla, de esta forma podemos implementar el 
-// polimorfismo con el operador de insercion
 std::ostream& operator<<(std::ostream& os, Lattice &g) {
   g.print();
   return os;
 }
 
-// --------- MODIFICACION -----------
-
-void Lattice::contEstados(void){
-  int v = 0, m = 0;
-  for(int i = 1; i < ntam_ + 1; i++){
-    	if (rejilla_[i].getState()->getState() == A){
-	  v++;	
-	}else if (rejilla_[i].getState()->getState() == D) {
-	  m++;
-	}
-    
-  }
-  std::cout << "Vivas: " << v << " Muertas: " << m << std::endl;
+Lattice::~Lattice() {
+  delete[] lattice;
+  std::cout << "Destruccion base" << std::endl;
 }
-
-
-Lattice::~Lattice(){std::cout << "Destruccion base" << std::endl;}
-
-// Bateria para cargar celulas vivas directamente para probar el codigo
-void Lattice::defecto(void){
-    rejilla_[1].setState(new StateAlive(&rejilla_[1]));  
-}
-
+/*
 // Bucle para insertar celulas dentro de la rejilla
 void Lattice::insert(void){
 
@@ -52,7 +33,7 @@ void Lattice::insert(void){
 
   while (!quit) {
     std::cout << "Lattice actual:" << std::endl;
-    print();
+    //print();
     std::cout << "1) Introducir celula viva" << std::endl;
     std::cout << "2) Terminar" << std::endl;
     std::cout << "opt> ";
@@ -68,15 +49,15 @@ void Lattice::insert(void){
       std::cout << "x: ";
       std::cin >> x;
 
-      if (x < ntam_ + 1){
+      if (x < this->size + 1){
         std::cout << "En que estado? (D | A) : ";
         std::cin >> e;
         switch (e){
         case 'D':
-            rejilla_[x].setState(new StateDead(&rejilla_[x]));
+            this->lattice[x].setState(" ");
           break;
         case 'A':
-            rejilla_[x].setState(new StateAlive(&rejilla_[x]));
+            this->lattice[x].setState(new StateAlive(&this->lattice[x]));
           break;        
         default:
           std::cout << "Error. Estado desconocido" << std::endl;
@@ -92,6 +73,7 @@ void Lattice::insert(void){
     }
   }
 }
+*/
 
 // Lleva la rejilla a la siguiente generacion
 // Recorre la matriz una primera vez para que cada celula actualice sus
@@ -99,16 +81,37 @@ void Lattice::insert(void){
 // Vemos que solo se actualizan las celulas de dentro, las que no estan en
 // el borde
 void Lattice::nextGeneration(void){
-
-  // Actualizamos vecinas vivas
-  for (int i = 1; i < ntam_ + 1; i++) {
-      rejilla_[i].neighbors(*this);
+  for (int i = 0; i < this->size; i++) {
+    this->lattice[i].nextState(*this);
   }
-  for (int i = 1; i < ntam_ + 1; i++) {
-      rejilla_[i].updateState();
+  for (int i = 0; i < this->size; i++) {
+    this->lattice[i].updateState();
   }
-  turno_++;
   print();
 }
+
+void Lattice::print() {
+  for (int i = 0; i < this->size; i++) {   
+    std::cout << this->lattice[i];
+  }
+  std::cout << std::endl;
+}
+
+/*
+// --------- MODIFICACION -----------
+
+void Lattice::contEstados(void){
+  int v = 0, m = 0;
+  for(int i = 1; i < this->size + 1; i++){
+    	if (this->lattice[i].getState()->getState() == A){
+	  v++;	
+	}else if (this->lattice[i].getState()->getState() == D) {
+	  m++;
+	}    
+  }
+  std::cout << "Vivas: " << v << " Muertas: " << m << std::endl;
+}
+
+*/
 
 

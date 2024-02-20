@@ -2,20 +2,17 @@
 #define _STATE_
 
 #include <iostream>
-#include "enum.h"
 
-class Rejilla;
-class Celula;
-class Grid;
-
-// Clase abstracta | todos los metodos son virtuales puros
 class State {
+  private:
+    int state;
   public:
-    State();
+    State(int state = 0);
     int getState();
+    int getState() const;
     void setState(int state);
-    int neighbors(const Grid&, int i);
-    State* nextState();
+    std::string print() const;
+    friend std::ostream& operator<<(std::ostream& os, const State &s);
 };
 
 #endif

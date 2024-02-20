@@ -24,7 +24,7 @@ class Lattice{
     virtual std::string getName(void) = 0;
     int getTam(void){ return size;}
 
-    virtual void print() = 0;
+    void print();
     friend std::ostream& operator<<(std::ostream& os, Lattice &g);
 
     void nextGeneration(void);

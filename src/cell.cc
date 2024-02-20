@@ -1,72 +1,54 @@
 #include "../include/cell.h"
-#include "../include/state.h"
 
 
-Cell::Cell() {
+Cell::Cell() {}
 
+Cell::Cell(Position& position, State& state){
+  this->position = position;
+  this->state = state; 
+  this->nextState_ = nullptr;
 }
 
-Cell::Cell(Position& position ,State* estado){
-  position_ = position;
-  vecinas_.resize(2);
+Cell::~Cell(void){}
 
-  if (estado == nullptr){
-    estado_ = new StateDead(this);
-  } else {
-    estado_ = estado;
-  }
+const State& Cell::getState(void) const{
+  return this->state;
 }
 
-Cell::~Cell(void){
-  delete estado_;
+const int Cell::getStateValue(void) const{
+  return this->state.getState();
 }
 
-void Cell::clearVecinas(void){
-  for (int i = 0; i < vecinas_.size(); i++)
-    vecinas_[i] = 0;
+void Cell::setState(State& state){
+  this->state = state;
 }
 
-State const * Cell::getState(void) const{
-  return estado_;
-}
-
-std::vector<int>& Cell::getVecinas(void){
-  return vecinas_;
-}
-
-void Cell::setState(State* estado){
-  delete estado_;
-  estado_ = estado;
+void Cell::setPosition(Position position){
+  this->position = position;
 }
 
 Position Cell::getPosition(void){
-  return position_;
+  return this->position;
 }
 
-int Cell::getVivas(void){
-  return 0;
+int Cell::nextState(const Lattice& lattice) {
+  Cell leftCell = lattice.getCell(this->position.getPosition() - 1);
+  Cell rightCell = lattice.getCell(this->position.getPosition() + 1);
+  //C(G+1)=(C(G)+R(G)+C(G)*R(G)+L(G)*C(G)*R(G))%2
+  int result0 = (this->getStateValue() + rightCell.getStateValue());  
+  int result1 = (this->getStateValue() * rightCell.getStateValue());
+  int result2 = leftCell.getStateValue() * this->getStateValue() * rightCell.getStateValue();
+  int result = (result0 + result1 + result2) % 2;
+
+  this->nextState_ = new State(result);
+  return result;
 }
 
-void Cell::updateState(void){
-  // Cambia su estado por el que dicte su objeto estado
-  estado_ = estado_->nextState();
+void Cell::updateState() {
+  this->state = *this->nextState_;
 }
-
-/**
- * void Cell::neighbors(const Grid& g){
-  estado_->neighbors(g, position_);
-}
-*/
-
 
 std::ostream& operator<<(std::ostream& os, const Cell& cell){
-  switch (cell.getState()->getState())
-  {
-  case A:
-      return os << "🔵";
-    break;
-  case D:
-      return os << "🔴";
-    break;
-  }
+  os << cell.getState();
+  return os;
 }

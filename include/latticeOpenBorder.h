@@ -1,4 +1,8 @@
+#ifndef __LATTICEOPENBORDER__ 
+#define __LATTICEOPENBORDER__
+
 #include "../include/lattice.h"
+#include "../include/cell.h"
 
 class LatticeOpenBorder: public Lattice{
   public:
@@ -9,6 +13,8 @@ class LatticeOpenBorder: public Lattice{
     const Cell& getCell(int) const;
     std::string getName(void){return "Open";}
 
-    //std::ostream& operator<<(std::ostream& os);
-    virtual void print();
+    private:
+      Cell border;
 };
+
+#endif

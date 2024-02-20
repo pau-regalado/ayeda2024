@@ -1,15 +1,16 @@
-#include "../include/lattice/lattice.h"
-#include "../include/celula.h"
+//#include "../include/latticePeriodicBorder.h"
+#include "../include/latticeOpenBorder.h"
+#include "../include/cell.h"
 
 int main (void){ 
   
-  Lattice* g = new LatticeOpenBorder(10);
+  Lattice* g = new LatticeOpenBorder(20);
   int opt;
   char type;
   bool quit = false;
 
   while (!quit) {
-    std::cout << "Grid actual: " << g->getName() << " Size: " << g->getPosition() << std::endl;
+    //std::cout << "Lattice actual: " << g->getName() << " Size: " << g->getPosition() << std::endl;
     g->print();
     std::cout << "1) Introducir celulas vivas" << std::endl;
     std::cout << "2) Seleccionar Grid" << std::endl;
@@ -24,7 +25,7 @@ int main (void){
 
     switch (opt){
     case 1: {
-      g->insert();
+      //g->insert();
       break;
     }
     case 2: {
@@ -46,7 +47,7 @@ int main (void){
         g = new LatticeOpenBorder(tam);
         break;
       }
-      case 'P': {
+      /*case 'P': {
         g = new LatticePeriodicBorder(tam);
         break;
       }
@@ -54,6 +55,7 @@ int main (void){
         g = new LatticeReflectiveBorder(tam);
         break;
       }
+      */
       default:
         g = new LatticeOpenBorder(tam);
         break;
@@ -66,7 +68,7 @@ int main (void){
       break;
     }
     case 4: {
-        g->defecto();
+        //g->defecto();
       break;
     }
     case 0:

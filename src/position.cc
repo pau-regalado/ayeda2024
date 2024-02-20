@@ -1,17 +1,17 @@
 #include "../include/position.h"
 
 
-Position::Position(int x){
-  x_ = x;
+Position::Position(int position){
+  this->position = position;
 }
 
 Position::~Position(void){}
 
-void Position::setX(const int x){
-  x_ = x;
+void Position::setPosition(const int position){
+  this->position = position;
 }
 
-int Position::getX(void) const{
-  return x_;
+int Position::getPosition(void) const{
+  return this->position;
 }
 

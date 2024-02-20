@@ -1,4 +1,4 @@
-#include "../include/lattice.h"
+/*#include "../include/lattice.h"
 
 class LatticeReflectiveBorder: public Lattice{
   public:
@@ -12,3 +12,4 @@ class LatticeReflectiveBorder: public Lattice{
     //std::ostream& operator<<(std::ostream& os);
     virtual void print();
 };
+*/

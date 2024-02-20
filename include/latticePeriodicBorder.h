@@ -1,4 +1,4 @@
-#include "../include/lattice.h"
+/*#include "../include/lattice.h"
 
 class LatticePeriodicBorder: public Lattice{
   public:
@@ -11,3 +11,4 @@ class LatticePeriodicBorder: public Lattice{
 
     virtual void print();
 };
+*/

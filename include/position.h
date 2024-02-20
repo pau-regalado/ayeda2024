@@ -7,14 +7,14 @@
 
 class Position{
   private:
-    int x_;
+    int position;
   
   public:
-    Position(int x = 0);
+    Position(int position = 0);
     ~Position(void);
 
-    void setX(const int x);
-    int getX(void) const;
+    void setPosition(const int position);
+    int getPosition(void) const;
 };
 
 

@@ -17,7 +17,7 @@ class Lattice{
 
   public:
     Lattice(int size = DEFAULT_SIZE);
-    virtual ~Lattice() = 0;
+    ~Lattice();
 
     virtual Cell& getCell(int) = 0; 
     virtual const Cell& getCell(int) const = 0;

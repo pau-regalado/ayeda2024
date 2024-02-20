@@ -91,10 +91,11 @@ void Lattice::nextGeneration(void){
 }
 
 void Lattice::print() {
+  std::cout << "|"; 
   for (int i = 0; i < this->size; i++) {   
     std::cout << this->lattice[i];
   }
-  std::cout << std::endl;
+  std::cout << "|" << std::endl;
 }
 
 /*

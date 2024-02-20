@@ -1,34 +1,24 @@
-/*#include "../include/latticePeriodicBorder.h"
+#include "../include/latticePeriodicBorder.h"
 
 LatticePeriodicBorder::LatticePeriodicBorder(int size): Lattice(size){}
 
-LatticePeriodicBorder::~LatticePeriodicBorder(){
-  delete this->lattice;  
-}
+LatticePeriodicBorder::~LatticePeriodicBorder(){}
 
-// Devuelve la celula en la posicion indicada.
-// Si una coordenada toca el borde, se le asigna la posicion del lado opuesto,
-// dando efecto de rejilla circular.
-Cell& LatticePeriodicBorder::getCell(int size){
-  if (size == 0) {
-    size = this->size;
-  }else if (size == this->size + 1) {
-    size = 0;
+Cell& LatticePeriodicBorder::getCell(int position){
+  if (position == -1) {
+    return this->lattice[size - 1];
+  } else if(position == size) {
+    return this->lattice[0];
   }
-  return this->lattice[size];
+  return this->lattice[position];
 }
 
-const Cell& LatticePeriodicBorder::getCell(int size) const{
-  if (size == 0) {
-    size = this->size;
-  }else if (size == this->size + 1) {
-    size = 1;
+const Cell& LatticePeriodicBorder::getCell(int position) const{
+  if (position == -1) {
+    return this->lattice[position - 1];
+  } else if(position == size) {
+    return this->lattice[0];
   }
-  return this->lattice[size];
+  return this->lattice[position];
 }
 
-void LatticePeriodicBorder::print(void){
-  std::cout << this->lattice;
-  //contEstados();
-}
-*/

@@ -1,4 +1,5 @@
-/*#include "../include/lattice.h"
+#include "../include/lattice.h"
+#include "../include/cell.h"
 
 class LatticePeriodicBorder: public Lattice{
   public:
@@ -9,6 +10,4 @@ class LatticePeriodicBorder: public Lattice{
     const Cell& getCell(int) const;
     std::string getName(void){return "Periodic";}
 
-    virtual void print();
 };
-*/

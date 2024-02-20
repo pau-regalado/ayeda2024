@@ -1,4 +1,7 @@
-/*#include "../include/lattice.h"
+#ifndef __LATTICEREFLECTIVEBORDER__ 
+#define __LATTICEREFLECTIVEBORDER__
+#include "../include/lattice.h"
+#include "../include/cell.h"
 
 class LatticeReflectiveBorder: public Lattice{
   public:
@@ -7,9 +10,7 @@ class LatticeReflectiveBorder: public Lattice{
 
     Cell& getCell(int);
     const Cell& getCell(int) const;
-    std::string getName(void){return "Reflective";}
-
-    //std::ostream& operator<<(std::ostream& os);
-    virtual void print();
+    std::string getName(void){return "Reflective";} 
 };
-*/
+
+#endif

@@ -12,11 +12,12 @@ class Cell;
 
 class Lattice{
   protected:
-    int size;
+    int size; 
     Cell* lattice;
 
   public:
     Lattice(int size = DEFAULT_SIZE);
+    Lattice(std::vector<int> data);
     ~Lattice();
 
     virtual Cell& getCell(int) = 0; 

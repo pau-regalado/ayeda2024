@@ -7,9 +7,7 @@ LatticeOpenBorder::LatticeOpenBorder(int position): Lattice(position){
   this->border = Cell(auxPosition, state);
 }
 
-LatticeOpenBorder::~LatticeOpenBorder(){
-  //delete this->lattice; 
-}
+LatticeOpenBorder::~LatticeOpenBorder(){}
 
 // Devuelve la celula en la posicion indicada. OpenBorder no calcula nada
 Cell& LatticeOpenBorder::getCell(int position){

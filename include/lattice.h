@@ -4,7 +4,10 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include "enum.h"
+#include <chrono>
+#include <thread>
+
+#include "position.h"
 
 const int DEFAULT_SIZE = 10;
 
@@ -25,10 +28,15 @@ class Lattice{
     virtual std::string getName(void) = 0;
     int getTam(void){ return size;}
 
+    void setCell(Position& position, Cell& cell);
+
     void print();
     friend std::ostream& operator<<(std::ostream& os, Lattice &g);
 
+    void startGeneration(void);
     void nextGeneration(void);
+
+    void contEstados(void);
 };
 
 #endif

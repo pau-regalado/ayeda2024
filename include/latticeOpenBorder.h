@@ -6,7 +6,7 @@
 
 class LatticeOpenBorder: public Lattice{
   public:
-    LatticeOpenBorder(int size);
+    LatticeOpenBorder(int size, int initialCellState = 0);
     ~LatticeOpenBorder();
 
     Cell& getCell(int);

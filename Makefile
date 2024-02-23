@@ -8,7 +8,7 @@ INCLUDE := include
 LIB     := lib
 LIBRARIES   := 
 EXECUTABLE  := main
-PARAMS	:= 
+PARAMS	:= -size 30 -border open 1 -init ../dataFile/file2.txt
 SOURCES := $(wildcard $(SRC)/*.cc)
 OBJS	:= $(patsubst $(SRC)/%.cc,$(BUILD)/%.o,$(SOURCES))
 
@@ -30,7 +30,6 @@ project:
 	mkdir -p bin build include src
 
 run:
-	clear
 	@echo "🚀 Executing..."
 	./$(BIN)/$(EXECUTABLE) $(PARAMS)
 

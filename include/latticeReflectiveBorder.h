@@ -1,5 +1,6 @@
 #ifndef __LATTICEREFLECTIVEBORDER__ 
 #define __LATTICEREFLECTIVEBORDER__
+
 #include "../include/lattice.h"
 #include "../include/cell.h"
 

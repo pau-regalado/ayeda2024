@@ -3,7 +3,6 @@
 
 #include <vector>
 #include <iostream>
-#include "enum.h"
 
 class Position{
   private:
@@ -16,6 +15,5 @@ class Position{
     void setPosition(const int position);
     int getPosition(void) const;
 };
-
 
 #endif

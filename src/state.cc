@@ -28,4 +28,3 @@ std::ostream& operator<<(std::ostream& os, const State &s) {
   os << s.print();
   return os;
 }
-

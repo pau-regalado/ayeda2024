@@ -1,9 +1,8 @@
 #include "../include/latticeOpenBorder.h"
-//#include "../include/cell.h"
 
-LatticeOpenBorder::LatticeOpenBorder(int position): Lattice(position){
+LatticeOpenBorder::LatticeOpenBorder(int position, int initialCellState): Lattice(position){
   Position auxPosition(0);
-  State state(0);
+  State state(initialCellState);
   this->border = Cell(auxPosition, state);
 }
 

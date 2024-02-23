@@ -1,6 +1,5 @@
 #include "../include/cell.h"
 
-
 Cell::Cell() {}
 
 Cell::Cell(Position& position, State& state){

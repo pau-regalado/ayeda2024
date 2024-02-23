@@ -1,6 +1,8 @@
 #include "../include/cell.h"
 #include "../include/state.h"
 #include "../include/lattice.h"
+#include <chrono>
+#include <thread>
 
 Lattice::Lattice(int size){
   this->size = size;
@@ -30,6 +32,9 @@ Lattice::Lattice(std::vector<int> data){
   }
 }
 
+void Lattice::setCell(Position& position, Cell& cell) {
+  lattice[position.getPosition()] = cell;
+}
 
 std::ostream& operator<<(std::ostream& os, Lattice &g) {
   g.print();
@@ -41,39 +46,43 @@ Lattice::~Lattice() {
   std::cout << "Destruccion base" << std::endl;
 }
 
-void Lattice::nextGeneration(void){
-  for (int i = 0; i < this->size; i++) {
-    this->lattice[i].nextState(*this);
+void Lattice::startGeneration(void) {
+  bool quit = false;
+  this->print();
+  
+  for(int i = 0; i <= 25; i++) {
+    this->nextGeneration();
+    print();
+    std::this_thread::sleep_for(std::chrono::milliseconds(200));
   }
+}
+
+void Lattice::nextGeneration(void) {
+  for (int i = 0; i < this->size; i++) {
+    this->lattice[i].nextState(*this);  
+  }
+ 
   for (int i = 0; i < this->size; i++) {
     this->lattice[i].updateState();
   }
-  print();
+  
 }
 
 void Lattice::print() {
   std::cout << "|"; 
-  for (int i = 0; i < this->size; i++) {   
+  int v = 0, m = 0;
+  for (int i = 0; i < this->size; i++) { 
+    /*
+    if (this->lattice[i].getStateValue() == 1){
+        v++;	
+      }else if (this->lattice[i].getStateValue() == 0) {
+        m++;
+	    }  
+    */
     std::cout << this->lattice[i];
   }
   std::cout << "|" << std::endl;
+  //std::cout << "Vivas: " << v << " Muertas: " << m << std::endl;
 }
-
-/*
-// --------- MODIFICACION -----------
-
-void Lattice::contEstados(void){
-  int v = 0, m = 0;
-  for(int i = 1; i < this->size + 1; i++){
-    	if (this->lattice[i].getState()->getState() == A){
-	  v++;	
-	}else if (this->lattice[i].getState()->getState() == D) {
-	  m++;
-	}    
-  }
-  std::cout << "Vivas: " << v << " Muertas: " << m << std::endl;
-}
-
-*/
 
 

@@ -3,7 +3,6 @@
 
 #include <vector>
 #include <iostream>
-#include "enum.h"
 #include "position.h"
 #include "state.h"
 #include "lattice.h"

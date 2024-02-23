@@ -21,4 +21,3 @@ const Cell& LatticePeriodicBorder::getCell(int position) const{
   }
   return this->lattice[position];
 }
-

@@ -1,5 +1,4 @@
 #include "../include/latticeReflectiveBorder.h"
-//#include "../include/cell.h"
 
 LatticeReflectiveBorder::LatticeReflectiveBorder(int size): Lattice(size){}
 
@@ -22,4 +21,3 @@ const Cell& LatticeReflectiveBorder::getCell(int position) const{
   }
   return this->lattice[position];
 }
-

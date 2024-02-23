@@ -43,6 +43,32 @@ int Cell::nextState(const Lattice& lattice) {
   return result;
 }
 
+
+int Cell::nextStateMod(const Lattice& lattice) {
+  Cell leftCell = lattice.getCell(this->position.getPosition() - 1);
+  Cell leftCell2 = lattice.getCell(this->position.getPosition() - 2);
+  Cell rightCell = lattice.getCell(this->position.getPosition() + 1);
+  Cell rightCell2 = lattice.getCell(this->position.getPosition() + 2);
+  //C(G+1)=(C(G)+R(G)+C(G)*R(G)+L(G)*C(G)*R(G))%2
+  int result0 = (this->getStateValue() + rightCell2.getStateValue());  
+  int result1 = (this->getStateValue() * rightCell2.getStateValue());
+  int result2 = leftCell2.getStateValue() * this->getStateValue() * rightCell.getStateValue();
+  int result = (result0 + result1 + result2) % 2;
+  /*
+  int vivas = 0;
+  if (this->getStateValue() == 1) { vivas++; }  
+  if (leftCell.getStateValue() == 1) { vivas++; }   
+  if (leftCell2.getStateValue() == 1) { vivas++; } 
+  if (rightCell.getStateValue() == 1) { vivas++; } 
+  if (rightCell2.getStateValue() == 1) { vivas++; }
+
+  if (vivas < 3) {} 
+  */
+
+  this->nextState_ = new State(result);
+  return result;
+}
+
 void Cell::updateState() {
   this->state = *this->nextState_;
 }

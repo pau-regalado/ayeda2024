@@ -8,7 +8,8 @@ INCLUDE := include
 LIB     := lib
 LIBRARIES   := 
 EXECUTABLE  := main
-PARAMS	:= -size 30 -border open 1 -init ../dataFile/file2.txt
+PARAMS	:= -size 30 -border periodic
+PARAMS1	:= -size 30 -border reflective -init ../dataFile/file2.txt
 SOURCES := $(wildcard $(SRC)/*.cc)
 OBJS	:= $(patsubst $(SRC)/%.cc,$(BUILD)/%.o,$(SOURCES))
 

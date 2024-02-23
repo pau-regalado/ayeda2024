@@ -27,6 +27,7 @@ class Cell{
     Position getPosition(void);
 
     int nextState(const Lattice&);
+    int nextStateMod(const Lattice&);
     void updateState();
 
     friend std::ostream& operator<<(std::ostream& os, const Cell& cell);

@@ -6,13 +6,12 @@
 
 class LatticePeriodicBorder: public Lattice{
   public:
-    LatticePeriodicBorder(int size);
+    LatticePeriodicBorder(int row, int col);
     ~LatticePeriodicBorder();
 
-    Cell& getCell(int);
-    const Cell& getCell(int) const;
+    Cell& getCell(Position);
+    const Cell& getCell(Position) const;
     std::string getName(void){return "Periodic";}
-
 };
 
 #endif

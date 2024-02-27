@@ -10,28 +10,28 @@
 class Cell{
   private:
     Position position;
-    State state;
-    State* nextState_;
+    State* state;
+    State* nState;
+    std::vector<Position> neighbours = { {-1, -1}, {-1, 0}, {0, -1}, {1, -1}, {1, 1}, {1, 0}, {0, 1}, {-1, 1} };
 
   public:
+  
     Cell();
-    Cell(Position& position, State& estado);
+    Cell(Position& position, State* estado);
     ~Cell(void);
 
     const State& getState(void) const;
-    const int getStateValue(void) const;
+    const int getStateInt(void) const;
     void setState(State& estado);
 
     void setPosition(const Position position);
     Position getPosition(void) const;
     Position getPosition(void);
-
-    int nextState(const Lattice&);
-    int nextStateMod(const Lattice&);
+    
     void updateState();
+    int nextState(const Lattice&);
+    int countAliveNeighbours(const Lattice& lattice);
 
     friend std::ostream& operator<<(std::ostream& os, const Cell& cell);
-
 };
-
 #endif

@@ -1,23 +1,39 @@
 #include "../include/latticePeriodicBorder.h"
 
-LatticePeriodicBorder::LatticePeriodicBorder(int size): Lattice(size){}
+LatticePeriodicBorder::LatticePeriodicBorder(int row, int col): Lattice(row, col){}
 
 LatticePeriodicBorder::~LatticePeriodicBorder(){}
 
-Cell& LatticePeriodicBorder::getCell(int position){
-  if (position == -1) {
-    return this->lattice[size - 1];
-  } else if(position == size) {
-    return this->lattice[0];
+Cell& LatticePeriodicBorder::getCell(Position p){
+  //std::cout << "i was here" << std::endl;
+  int x = p.getX();
+  int y = p.getY();
+  if (x < 0) {
+    x = this->row - 1;
+  }else if (x >= this->row) {
+    x = 0;
   }
-  return this->lattice[position];
+  if (y < 0) {
+    y = this->col - 1;
+  }else if (y >= this->col) {
+    y = 0;
+  }
+  return this->lattice[x][y];
+  
 }
 
-const Cell& LatticePeriodicBorder::getCell(int position) const{
-  if (position == -1) {
-    return this->lattice[position - 1];
-  } else if(position == size) {
-    return this->lattice[0];
+const Cell& LatticePeriodicBorder::getCell(Position p) const{
+  int x = p.getX();
+  int y = p.getY();
+  if (x < 0) {
+    x = this->row - 1;
+  }else if (x >= this->row) {
+    x = 0;
   }
-  return this->lattice[position];
+  if (y < 0) {
+    y = this->col - 1;
+  }else if (y >= this->col) {
+    y = 0;
+  }
+  return this->lattice[x][y];
 }

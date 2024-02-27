@@ -6,14 +6,17 @@
 
 class Position{
   private:
-    int position;
+    int x, y;
   
   public:
-    Position(int position = 0);
+    Position(int x = 0, int y = 0);
     ~Position(void);
 
-    void setPosition(const int position);
-    int getPosition(void) const;
+    void setX(const int x);
+    int getX(void) const;
+    void setY(const int y);
+    int getY(void) const;
+    Position operator+(Position p);
 };
 
 #endif

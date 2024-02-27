@@ -6,11 +6,11 @@
 
 class LatticeReflectiveBorder: public Lattice{
   public:
-    LatticeReflectiveBorder(int size);
+    LatticeReflectiveBorder(int row, int col);
     ~LatticeReflectiveBorder();
 
-    Cell& getCell(int);
-    const Cell& getCell(int) const;
+    Cell& getCell(Position);
+    const Cell& getCell(Position) const;
     std::string getName(void){return "Reflective";} 
 };
 

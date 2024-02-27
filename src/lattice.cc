@@ -1,39 +1,47 @@
 #include "../include/cell.h"
-#include "../include/state.h"
+#include "../include/stateAlive.h"
 #include "../include/lattice.h"
 #include <chrono>
 #include <thread>
 
-Lattice::Lattice(int size){
-  this->size = size;
-  this->lattice = new Cell[size];
-  for (int i = 0; i < size; i++) {   
-    Position position(i);
-    State state(0);  
-    lattice[i] = Cell(position, state);      
+Lattice::Lattice(int row, int col){
+  this->row = row;
+  this->col = col;
+  this->lattice.resize(this->row);
+  for (int i = 0; i < this->row; i++) {
+    this->lattice[i].resize(this->col);
+    for (int j = 0; j < this->col; j++) {
+      this->lattice[i][j].setPosition(Position(i, j));
+      //std::cout << lattice[i][j].getStateInt() ;
+    }
   } 
-  Position middle(size/2);
-  State iniState(1);
-  lattice[size/2] = Cell(middle, iniState);
+  this->defaultCell();
 }
 
+void Lattice::defaultCell(void){
+  insertAlive(Position(4, 4));
+  insertAlive(Position(4, 3));
+  insertAlive(Position(3, 4));
+  insertAlive(Position(5, 5));
+  insertAlive(Position(3, 5));
+  insertAlive(Position(5, 3));
+  insertAlive(Position(0, 0));
+  insertAlive(Position(0, 1));
+  //insertAlive(Position(1, 0));
+  //insertAlive(Position(1, 1));
+  //insertAlive(Position(0, 2));
+}
+
+void Lattice::insertAlive(Position p) {
+  lattice[p.getX()][p.getY()] = Cell(p, new StateAlive());
+}
 
 Lattice::Lattice(std::vector<int> data){ 
-  for(int i = 0; i <= data.size(); i++) {
-    if (data[i] == 0) {
-      Position position(i);     
-      State state(0);  
-      lattice[i] = Cell(position, state);
-    } else {
-      Position position(i);
-      State state(1);  
-      lattice[i] = Cell(position, state);
-    }
-  }
+
 }
 
-void Lattice::setCell(Position& position, Cell& cell) {
-  lattice[position.getPosition()] = cell;
+void Lattice::setCell(const Position& p, Cell& cell) {
+  lattice[p.getX()][p.getY()] = cell;
 }
 
 std::ostream& operator<<(std::ostream& os, Lattice &g) {
@@ -41,8 +49,11 @@ std::ostream& operator<<(std::ostream& os, Lattice &g) {
   return os;
 }
 
+Cell& Lattice::operator[](const Position& p) {
+  return lattice[p.getX()][p.getY()];
+}
+
 Lattice::~Lattice() {
-  delete[] lattice;
   std::cout << "Destruccion base" << std::endl;
 }
 
@@ -50,39 +61,43 @@ void Lattice::startGeneration(void) {
   bool quit = false;
   this->print();
   
-  for(int i = 0; i <= 25; i++) {
+  for(int i = 0; i <= 5; i++) {
     this->nextGeneration();
     print();
-    std::this_thread::sleep_for(std::chrono::milliseconds(200));
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
   }
 }
 
 void Lattice::nextGeneration(void) {
-  for (int i = 0; i < this->size; i++) {
-    this->lattice[i].nextState(*this);  
+  for (int i = 0; i < this->row; i++) {
+    for (int j = 0; j < this->col; j++) {
+      this->lattice[i][j].nextState(*this);  
+    }
   }
  
-  for (int i = 0; i < this->size; i++) {
-    this->lattice[i].updateState();
-  }
-  
+  for (int i = 0; i < this->row; i++) {
+    for (int j = 0; j < this->col; j++) {
+      this->lattice[i][j].updateState();
+    }
+  } 
 }
 
 void Lattice::print() {
-  std::cout << "|"; 
-  int v = 0, m = 0;
-  for (int i = 0; i < this->size; i++) { 
-    /*
-    if (this->lattice[i].getStateValue() == 1){
-        v++;	
-      }else if (this->lattice[i].getStateValue() == 0) {
-        m++;
-	    }  
-    */
-    std::cout << this->lattice[i];
+  for (int i = 0; i < this->col + 2; i++){
+    std::cout << "⬛";
   }
-  std::cout << "|" << std::endl;
-  //std::cout << "Vivas: " << v << " Muertas: " << m << std::endl;
+  std::cout << std::endl;
+
+  for (int i = 0; i < this->row; i++) {
+    std::cout << "⬛";
+    for (int j = 0; j < this->col; j++) {
+      std::cout << this->lattice[i][j];
+    }
+    std::cout << "⬛" << std::endl;
+  }
+  
+  for (int i = 0; i < this->col + 2; i++){
+    std::cout << "⬛";
+  }
+  std::cout << std::endl << std::endl;
 }
-
-

@@ -6,11 +6,11 @@
 
 class LatticeOpenBorder: public Lattice{
   public:
-    LatticeOpenBorder(int size, int initialCellState = 0);
+    LatticeOpenBorder(int row, int col, int initialCellState = 0);
     ~LatticeOpenBorder();
 
-    Cell& getCell(int);
-    const Cell& getCell(int) const;
+    Cell& getCell(Position);
+    const Cell& getCell(Position) const;
     std::string getName(void){return "Open";}
 
     private:

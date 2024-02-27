@@ -15,28 +15,31 @@ class Cell;
 
 class Lattice{
   protected:
-    int size; 
-    Cell* lattice;
+    int row, col; 
+    std::vector<std::vector<Cell>> lattice;
 
   public:
-    Lattice(int size = DEFAULT_SIZE);
+    Lattice(int row = DEFAULT_SIZE, int col = DEFAULT_SIZE);
     Lattice(std::vector<int> data);
     ~Lattice();
 
-    virtual Cell& getCell(int) = 0; 
-    virtual const Cell& getCell(int) const = 0;
+    void defaultCell(void);
+    void insertAlive(Position);
+    virtual Cell& getCell(Position) = 0; 
+    virtual const Cell& getCell(Position) const = 0;
     virtual std::string getName(void) = 0;
-    int getTam(void){ return size;}
+    int getRow(void){ return row;}
+    int getCol(void){ return col;}
 
-    void setCell(Position& position, Cell& cell);
+    void setCell(const Position& p, Cell& cell);
 
     void print();
     friend std::ostream& operator<<(std::ostream& os, Lattice &g);
+    Cell& operator[](const Position&);
 
     void startGeneration(void);
     void nextGeneration(void);
 
-    void contEstados(void);
 };
 
 #endif

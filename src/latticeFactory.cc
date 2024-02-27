@@ -2,26 +2,32 @@
 #include "../include/latticeOpenBorder.h"
 #include "../include/latticePeriodicBorder.h"
 #include "../include/latticeReflectiveBorder.h"
+#include "../include/stateDead.h"
+#include "../include/stateAlive.h"
 
 LatticeFactory::LatticeFactory() {}
 
 LatticeFactory::~LatticeFactory() {}
 
 Lattice* LatticeFactory::generateLattice(int argc, char* argv[]) {
-  bool sizeCheck = false;
+  bool rowCheck, colCheck = false;
   bool typeCheck = false;
   int initialCellState = 0;
 
-  int size = 0;
+  int row, col = 0;
   std::string filename = "";
   latticeTypes latticeType = latticeTypes::OPEN_BORDER;
 
   for (int i = 1; i < argc; ++i) {
-    //std::cout << "Input : " << argv[i] << std::endl;
     if (strcmp(argv[i], "-size") == 0 && i + 1 < argc) {
-      size = std::stoi(argv[i + 1]);
-      if (size > 0) {
-        sizeCheck = true;
+      row = std::stoi(argv[i + 1]);
+      if (row > 0) {
+        rowCheck = true;
+      }
+      i++;
+      col = std::stoi(argv[i + 1]);
+      if (col > 0) {
+        colCheck = true;
       }
       i++;
     } else if (strcmp(argv[i], "-border") == 0 && i + 1 < argc) {
@@ -46,18 +52,19 @@ Lattice* LatticeFactory::generateLattice(int argc, char* argv[]) {
     }
   }
 
-  if (sizeCheck && typeCheck) {
+  if (rowCheck && colCheck && typeCheck) {
     switch (latticeType) {
       case latticeTypes::PERIODIC_BORDER: {
-        this->lattice = new LatticePeriodicBorder(size);
+        std::cout << "Periodic: " << std::endl;
+        this->lattice = new LatticePeriodicBorder(row, col);
         break;
       };
       case latticeTypes::REFLECTIVE_BORDER: {
-        this->lattice = new LatticeReflectiveBorder(size);
+        this->lattice = new LatticeReflectiveBorder(row, col);
         break;
       };
       case latticeTypes::OPEN_BORDER: {
-        this->lattice = new LatticeOpenBorder(size, initialCellState);
+        this->lattice = new LatticeOpenBorder(row, col, initialCellState);
         break;
       };
     default:
@@ -79,20 +86,28 @@ void LatticeFactory::buildLatticeFromFile(std::string filename) {
       throw std::runtime_error("Error al abrir el archivo.");
     }
 
-    int size;
-    file >> size;
+    int row;
+    file >> row;
+    int col;
+    file >> col;
 
     std::string line;
     file >> line;
 
-    for (int i = 0; i < size; ++i) {
-      if (line[i] == '0' || line[i] == '1') {
-          State state(line[i] - '0'); // Convertir el carácter a entero
-          Position position(i);
-          Cell cell(position, state);
-          this->lattice->setCell(position, cell);
-      } else {
-          throw std::runtime_error("El archivo contiene datos no válidos.");
+    for (int i = 0; i < row; ++i) {
+      for (int i = 0; i < col; ++i) {
+        if (line[i] == '0') {
+            State* state = new StateDead(); 
+            Position position(i);
+            Cell cell(position, state);
+            this->lattice->setCell(position, cell);
+        } else if (line[i] == '1') {
+            State* state = new StateAlive(); 
+            Position position(i);
+            Cell cell(position, state);
+        } else {
+            throw std::runtime_error("El archivo contiene datos no válidos.");
+        }
       }
     }
 }

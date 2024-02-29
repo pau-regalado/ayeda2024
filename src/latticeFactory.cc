@@ -2,6 +2,7 @@
 #include "../include/latticeOpenBorder.h"
 #include "../include/latticePeriodicBorder.h"
 #include "../include/latticeReflectiveBorder.h"
+#include "../include/latticeNonBorders.h"
 #include "../include/stateDead.h"
 #include "../include/stateAlive.h"
 
@@ -39,6 +40,9 @@ Lattice* LatticeFactory::generateLattice(int argc, char* argv[]) {
       } else if (strcmp(rawBorderType, "reflective") == 0) {
         latticeType = latticeTypes::REFLECTIVE_BORDER;
         typeCheck = true;
+      } else if (strcmp(rawBorderType, "nonborders") == 0) {
+        latticeType = latticeTypes::NON_BORDERS;
+        typeCheck = true;
       } else if (strcmp(rawBorderType, "open") == 0) {
         if ( i + 1 < argc) {
           initialCellState = std::stoi(argv[++i]);
@@ -61,6 +65,14 @@ Lattice* LatticeFactory::generateLattice(int argc, char* argv[]) {
           this->lattice = new LatticePeriodicBorder(filename);
         } else {
           this->lattice = new LatticePeriodicBorder(row, col);
+        }          
+        break;
+      };
+      case latticeTypes::NON_BORDERS: {
+        if (!filename.empty()) {
+          this->lattice = new LatticeNonBorders(filename);
+        } else {
+          this->lattice = new LatticeNonBorders(row, col);
         }          
         break;
       };

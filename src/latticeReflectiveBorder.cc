@@ -5,10 +5,9 @@ LatticeReflectiveBorder::LatticeReflectiveBorder(std::string filename): Lattice(
 
 LatticeReflectiveBorder::~LatticeReflectiveBorder(){}
 
-Cell& LatticeReflectiveBorder::getCell(Position p){
-  std::cout << "Hola";
-  int x = p.getX();
-  int y = p.getY();
+Cell& LatticeReflectiveBorder::getCell(Position* p){
+  int x = p->getX();
+  int y = p->getY();
   if (x < 0){
     x = 0;
     if (y < 0) {
@@ -45,9 +44,9 @@ Cell& LatticeReflectiveBorder::getCell(Position p){
   return this->lattice[x][y];
 }
 
-const Cell& LatticeReflectiveBorder::getCell(Position p) const{
-  int x = p.getX();
-  int y = p.getY();
+const Cell& LatticeReflectiveBorder::getCell(Position* p) const{
+  int x = p->getX();
+  int y = p->getY();
   if (x < 0){
     x = 0;
     if (y < 0) {

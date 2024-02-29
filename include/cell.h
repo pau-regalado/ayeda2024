@@ -9,7 +9,7 @@
 
 class Cell{
   private:
-    Position position;
+    Position* position;
     State* state;
     State* nState;
     std::vector<Position> neighbours = { {-1, -1}, {-1, 0}, {0, -1}, {1, -1}, {1, 1}, {1, 0}, {0, 1}, {-1, 1} };
@@ -17,20 +17,20 @@ class Cell{
   public:
   
     Cell();
-    Cell(Position& position, State* estado);
+    Cell(Position* position, State* estado);
     ~Cell(void);
 
     const State& getState(void) const;
     const int getStateInt(void) const;
     void setState(State& estado);
 
-    void setPosition(const Position position);
+    void setPosition(Position* position);
     Position getPosition(void) const;
     Position getPosition(void);
     
     void updateState();
-    int nextState(const Lattice&);
-    int countAliveNeighbours(const Lattice& lattice);
+    int nextState(Lattice& lattice);
+    int countAliveNeighbours(Lattice& lattice);
 
     friend std::ostream& operator<<(std::ostream& os, const Cell& cell);
 };

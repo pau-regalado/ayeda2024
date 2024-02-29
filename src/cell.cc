@@ -2,11 +2,11 @@
 #include "../include/stateDead.h"
 
 Cell::Cell() {
-  this->position = position;
+  this->position = new Position();
   this->state = new StateDead();
 }
 
-Cell::Cell(Position& position, State* state){
+Cell::Cell(Position* position, State* state){
   this->position = position;
   this->state = state; 
 }
@@ -25,15 +25,15 @@ void Cell::setState(State& state){
   this->state = &state;
 }
 
-void Cell::setPosition(Position position){
+void Cell::setPosition(Position* position){
   this->position = position;
 }
 
 Position Cell::getPosition(void){
-  return this->position;
+  return *(this->position);
 }
 
-int Cell::nextState(const Lattice& lattice) {
+int Cell::nextState(Lattice& lattice) {
   this->nState = this->state->nextState(this->countAliveNeighbours(lattice));
   return 0;
 }
@@ -42,10 +42,10 @@ void Cell::updateState() {
   this->state = this->nState;
 }
 
-int Cell::countAliveNeighbours(const Lattice& lattice) {
+int Cell::countAliveNeighbours(Lattice& lattice) {
   int alives = 0;
-  for (Position p: neighbours ) {
-    alives += lattice.getCell(this->position + p).getStateInt();
+  for (Position offset: neighbours ) {
+    alives += lattice.getCell(new Position(*(this->position) + offset)).getStateInt();
   }
   //std::cout << "i was here 1" << std::endl;
   return alives;

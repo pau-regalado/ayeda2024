@@ -10,9 +10,11 @@ class LatticeOpenBorder: public Lattice{
     LatticeOpenBorder(std::string filename, int initialCellState = 0);
     ~LatticeOpenBorder();
 
-    Cell& getCell(Position);
-    const Cell& getCell(Position) const;
+    Cell& getCell(Position*);
+    const Cell& getCell(Position*) const;
     std::string getName(void){return "Open";}
+
+    void nextGenerationSpecific(void) {}
 
     private:
       Cell* border;

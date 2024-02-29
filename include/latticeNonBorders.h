@@ -10,15 +10,15 @@ class LatticeNonBorders: public Lattice {
     LatticeNonBorders(std::string filename);
     ~LatticeNonBorders();
 
-    Cell& getCell(Position);
-    const Cell& getCell(Position) const;
+    Cell& getCell(Position*);
+    const Cell& getCell(Position*) const;
     std::string getName(void){return "Non borders";}
 
-    void nextGeneration(void) override;
+    void nextGenerationSpecific(void);
 
     void resetExpansionStatus();
 
-    void expandBorders(Position p);
+    void expandBorders(Position* p);
     void expandNorth();
     void expandSouth();
     void expandWest();

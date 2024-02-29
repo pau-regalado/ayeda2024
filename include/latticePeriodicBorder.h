@@ -10,9 +10,11 @@ class LatticePeriodicBorder: public Lattice{
     LatticePeriodicBorder(std::string filename);
     ~LatticePeriodicBorder();
 
-    Cell& getCell(Position);
-    const Cell& getCell(Position) const;
+    Cell& getCell(Position*);
+    const Cell& getCell(Position*) const;
     std::string getName(void){return "Periodic";}
+
+    void nextGenerationSpecific(void) {}
 };
 
 #endif

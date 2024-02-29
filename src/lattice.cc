@@ -12,7 +12,6 @@ Lattice::Lattice(int row, int col){
 }
 
 Lattice::Lattice(std::string filename) {
-  std::cout << "cree la hija" << std::endl;
   std::ifstream file("dataFile/" + filename);
   if (!file.is_open()) {
     throw std::runtime_error("Error al abrir el archivo.");
@@ -28,7 +27,6 @@ Lattice::Lattice(std::string filename) {
   for (int i = 0; i < row; ++i) {
     std::string line;
     file >> line;
-    std::cout << line << std::endl;
     for (int j = 0; j < col; ++j) {
       State* state;
       if (line[j] == '0') {
@@ -38,10 +36,8 @@ Lattice::Lattice(std::string filename) {
       } else {
         state = new StateDead();
       }
-      // std::cout << "creo cell " << i << " " << j << std::endl;
-      Position position(i, j);
-      Cell cell(position, state);
-      this->setCell(position, cell);
+      Cell cell(new Position(i, j), state);
+      this->setCell(new Position(i, j), cell);
     }
   }
 }
@@ -54,13 +50,14 @@ void Lattice::buildLattice(int row, int col) {
   for (int i = 0; i < this->row; i++) {
     this->lattice[i].resize(this->col);
     for (int j = 0; j < this->col; j++) {
-      this->lattice[i][j].setPosition(Position(i, j));
+      this->lattice[i][j].setPosition(new Position(i, j));
     }
   }
 }
 
 void Lattice::defaultCell(void){
-  insertAlive(Position(4, 4));
+  /*
+  insertAlive(new Position(4, 4));
   insertAlive(Position(4, 3));
   insertAlive(Position(3, 4));
   insertAlive(Position(5, 5));
@@ -68,14 +65,15 @@ void Lattice::defaultCell(void){
   insertAlive(Position(5, 3));
   insertAlive(Position(0, 0));
   insertAlive(Position(0, 1));
+  */
 }
 
-void Lattice::insertAlive(Position p) {
-  lattice[p.getX()][p.getY()] = Cell(p, new StateAlive());
+void Lattice::insertAlive(Position* p) {
+  lattice[p->getX()][p->getY()] = Cell(p, new StateAlive());
 }
 
-void Lattice::setCell(const Position& p, Cell& cell) {
-  lattice[p.getX()][p.getY()] = cell;
+void Lattice::setCell(const Position* p, Cell& cell) {
+  lattice[p->getX()][p->getY()] = cell;
 }
 
 std::ostream& operator<<(std::ostream& os, Lattice &g) {
@@ -83,9 +81,8 @@ std::ostream& operator<<(std::ostream& os, Lattice &g) {
   return os;
 }
 
-Cell& Lattice::operator[](const Position& p) {
-  std::cout << "operator" << std::endl;
-  return lattice[p.getX()][p.getY()];
+Cell& Lattice::operator[](const Position* p) {
+  return lattice[p->getX()][p->getY()];
 }
 
 Lattice::~Lattice() {
@@ -106,6 +103,7 @@ void Lattice::startGeneration(void) {
 void Lattice::nextGeneration(void) {
   this->currentIteration++;
   this->calculateNextGeneration();
+  this->nextGenerationSpecific();
   this->print();
 }
 

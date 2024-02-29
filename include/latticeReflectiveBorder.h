@@ -10,9 +10,11 @@ class LatticeReflectiveBorder: public Lattice{
     LatticeReflectiveBorder(std::string filename);
     ~LatticeReflectiveBorder();
 
-    Cell& getCell(Position);
-    const Cell& getCell(Position) const;
+    Cell& getCell(Position*);
+    const Cell& getCell(Position*) const;
     std::string getName(void){return "Reflective";} 
+
+    void nextGenerationSpecific(void) {}
 };
 
 #endif

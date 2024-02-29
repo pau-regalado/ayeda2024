@@ -5,9 +5,9 @@ LatticePeriodicBorder::LatticePeriodicBorder(std::string filename): Lattice(file
 
 LatticePeriodicBorder::~LatticePeriodicBorder(){}
 
-Cell& LatticePeriodicBorder::getCell(Position p){
-  int x = p.getX();
-  int y = p.getY();
+Cell& LatticePeriodicBorder::getCell(Position* p){
+  int x = p->getX();
+  int y = p->getY();
   if (x < 0) {
     x = this->row - 1;
   }else if (x >= this->row) {
@@ -22,9 +22,9 @@ Cell& LatticePeriodicBorder::getCell(Position p){
   
 }
 
-const Cell& LatticePeriodicBorder::getCell(Position p) const{
-  int x = p.getX();
-  int y = p.getY();
+const Cell& LatticePeriodicBorder::getCell(Position* p) const{
+  int x = p->getX();
+  int y = p->getY();
   if (x < 0) {
     x = this->row - 1;
   }else if (x >= this->row) {

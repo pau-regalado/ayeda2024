@@ -27,23 +27,23 @@ class Lattice{
 
     void buildLattice(int row, int col);
     void defaultCell(void);
-    void insertAlive(Position);
-    virtual Cell& getCell(Position) = 0; 
-    virtual const Cell& getCell(Position) const = 0;
+    void insertAlive(Position*);
+    virtual Cell& getCell(Position* p) = 0; 
     virtual std::string getName(void) = 0;
     int getRow(void){ return row;}
     int getCol(void){ return col;}
 
-    void setCell(const Position& p, Cell& cell);
+    void setCell(const Position* p, Cell& cell);
 
     void print();
     void printLattice();
     friend std::ostream& operator<<(std::ostream& os, Lattice &g);
-    Cell& operator[](const Position&);
+    Cell& operator[](const Position*);
 
     int population();
     void startGeneration(void);
     void nextGeneration(void);
+    virtual void nextGenerationSpecific(void) = 0;
     void calculateNextGeneration(void);
     void nextFiveGenerations(void);
     void switchOnlyPopulationMode();

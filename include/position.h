@@ -10,6 +10,7 @@ class Position{
   
   public:
     Position(int x = 0, int y = 0);
+    Position(const Position& p);
     ~Position(void);
 
     void setX(const int x);

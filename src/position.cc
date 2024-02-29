@@ -6,6 +6,11 @@ Position::Position(int x, int y){
   this->y = y;
 }
 
+Position::Position(const Position& p){
+  this->x = p.getX();
+  this->y = p.getY();
+}
+
 Position::~Position(void){}
 
 void Position::setX(const int x) { this->x = x; }

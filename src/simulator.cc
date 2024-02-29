@@ -46,6 +46,7 @@ char Simulator::showMenuAndAskForOption() {
   std::cout << "L) Next 5 generations" << std::endl;
   std::cout << "c) Switch only population mode" << std::endl;
   std::cout << "s) Save lattice" << std::endl;
+  std::cout << "x) Exit" << std::endl;
   std::cout << "opt> ";
 
   std::cin >> opt;

@@ -137,13 +137,15 @@ void Lattice::saveIntoAFile() {
 
 void Lattice::print() {
   std::cout << "Iteration: " << this->currentIteration << std::endl;
-  std::cout << "Population: " << this->population() << std::endl;
+  std::cout << "Population: ";
+  std::cout << this->population() << std::endl;
   if (!this->onlyPopulationMode) {
     this->printLattice();
   }
 }
 
 int Lattice::population() {
+  std::cout << "size: " << this->row << " " << this->row <<std::endl;
   int population = 0;
   for (int i = 0; i < this->row; i++) {
     for (int j = 0; j < this->col; j++) {

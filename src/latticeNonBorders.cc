@@ -3,10 +3,12 @@
 
 LatticeNonBorders::LatticeNonBorders(int row, int col) : Lattice(row, col) {
     this->resetExpansionStatus();
+    this->border = Cell(new Position(0, 0), new StateDead());
 }
 
 LatticeNonBorders::LatticeNonBorders(std::string filename) : Lattice(filename) {
     this->resetExpansionStatus();
+    this->border = Cell(new Position(0, 0), new StateDead());
 }
 
 void LatticeNonBorders::resetExpansionStatus() {
@@ -28,35 +30,34 @@ Cell& LatticeNonBorders::getCell(Position* p){
     int x = p->getX();
     int y = p->getY();
     if (x < 0 || x >= row || y < 0 || y >= col) {
-        (x < 0) ? x++ : x;
-        (x >= row) ? x = row : x;
-        (y < 0) ? y++ : y;
-        (y >= col) ? y = col : y;
-        this->expandBorders(p);
-        Position* pos = new Position(x, y);
-        Cell c(pos, new StateDead());
-        return c;
+        return this->border;
+    }
+    if (x == 0 || x == row - 1|| y == 0 || y == col - 1) {
+        if (lattice[x][y].getStateInt() == 1) {
+            this->expandBorders(p);
+        }
     }
     return lattice[x][y];
 }
 
 void LatticeNonBorders::expandBorders(Position* p) {
-    if (!this->expandedWest && p->getX() < 0) {
-        this->expandWest();
-        this->expandedWest = true;
-    }
-    if (!this->expandedEast && p->getX() >= this->col) {
-        this->expandEast();
-        this->expandedEast = true;
-    }
-    if (!this->expandedNorth && p->getY() < 0) {
+    if (!this->expandedNorth && p->getX() == 0) {
         this->expandNorth();
         this->expandedNorth = true;
     }
-    if (!this->expandedSouth && p->getY() >= this->row) {
+    if (!this->expandedSouth && p->getX() == this->row - 1) {
         this->expandSouth();
         this->expandedSouth = true;
     }
+    if (!this->expandedWest && p->getY() == 0) {
+        this->expandWest();
+        this->expandedWest = true;
+    }
+    if (!this->expandedEast && p->getY() == this->col - 1) {
+        this->expandEast();
+        this->expandedEast = true;
+    }
+    std::cout << "SALGO" << std::endl;
 }
 
 void LatticeNonBorders::expandNorth() {

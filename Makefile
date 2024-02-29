@@ -9,7 +9,7 @@ LIB     := lib
 LIBRARIES   := 
 EXECUTABLE  := main
 PARAMS	:= -size 10 10 -border open 0
-PARAMSFILE	:= -size 10 10 -border nonborders -init file2.txt
+PARAMSFILE	:= -size 10 10 -border nonborders -init file0.txt
 SOURCES := $(wildcard $(SRC)/*.cc)
 OBJS	:= $(patsubst $(SRC)/%.cc,$(BUILD)/%.o,$(SOURCES))
 

@@ -27,7 +27,8 @@ class LatticeNonBorders: public Lattice {
     void updatePositions();
 
     private:
-      bool expandedNorth, expandedSouth, expandedWest, expandedEast; 
+      bool expandedNorth, expandedSouth, expandedWest, expandedEast;
+      Cell border;
 };
 
 #endif

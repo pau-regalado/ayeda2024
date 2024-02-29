@@ -12,10 +12,9 @@ void Simulator::start() {
   char opt;
   char type;
   bool quit = false;
-  
-  this->lattice->print();
 
   while (!quit) {
+    this->lattice->print();
     switch (this->showMenuAndAskForOption()){
     case 'n': {
       lattice->nextGeneration();
@@ -33,6 +32,10 @@ void Simulator::start() {
       lattice->saveIntoAFile();
     break;
     }
+    case 'i': {
+      lattice->askToInsertCell();
+    break;
+    }
     case 'x':
       quit = true;
     break;
@@ -46,6 +49,7 @@ char Simulator::showMenuAndAskForOption() {
   std::cout << "L) Next 5 generations" << std::endl;
   std::cout << "c) Switch only population mode" << std::endl;
   std::cout << "s) Save lattice" << std::endl;
+  std::cout << "i) Insert a cell" << std::endl;
   std::cout << "opt> ";
 
   std::cin >> opt;

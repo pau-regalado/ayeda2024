@@ -24,13 +24,14 @@ class Lattice{
     Lattice(int row = DEFAULT_SIZE, int col = DEFAULT_SIZE);
     Lattice(std::string filename);
 
-    Lattice(const Lattice& other); // Constructor de copia
-    Lattice& operator=(const Lattice& other); // Operador de asignación
+    Lattice(const Lattice& other);
+    Lattice& operator=(const Lattice& other);
 
     ~Lattice();
 
     void buildLattice(int row, int col);
-    void defaultCell(void);
+
+    void askToInsertCell();
     void insertAlive(Position*);
     virtual Cell& getCell(Position* p) = 0; 
     virtual std::string getName(void) = 0;

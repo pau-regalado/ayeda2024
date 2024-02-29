@@ -12,7 +12,9 @@ class Cell{
     Position* position;
     State* state;
     State* nState;
-    std::vector<Position> neighbours = { {-1, -1}, {-1, 0}, {0, -1}, {1, -1}, {1, 1}, {1, 0}, {0, 1}, {-1, 1} };
+    std::vector<Position> neighbours = { {-1, -1}, {-1, 0}, {-1, 1},
+                                         { 0, -1},          { 0, 1},
+                                         { 1, -1}, { 1, 0}, { 1, 1}};
 
   public:
   

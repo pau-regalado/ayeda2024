@@ -8,8 +8,8 @@ INCLUDE := include
 LIB     := lib
 LIBRARIES   := 
 EXECUTABLE  := main
-PARAMS	:= -size 10 10 -border open 0 -init file1.txt
-PARAMSFILE	:= -size 10 10 -border nonborders -init file2.txt
+PARAMS	:= -size 10 10 -border open 1
+PARAMSFILE	:=  -border nonborders -init new.txt
 SOURCES := $(wildcard $(SRC)/*.cc)
 OBJS	:= $(patsubst $(SRC)/%.cc,$(BUILD)/%.o,$(SOURCES))
 

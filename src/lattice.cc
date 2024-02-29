@@ -8,7 +8,6 @@
 
 Lattice::Lattice(int row, int col){
   this->buildLattice(row, col);
-  this->defaultCell();
 }
 
 Lattice::Lattice(std::string filename) {
@@ -41,6 +40,7 @@ Lattice::Lattice(std::string filename) {
     }
   }
 }
+
 void Lattice::buildLattice(int row, int col) {
   this->onlyPopulationMode = false;
   this->currentIteration = 0;
@@ -55,21 +55,20 @@ void Lattice::buildLattice(int row, int col) {
   }
 }
 
-void Lattice::defaultCell(void){
-  /*
-  insertAlive(new Position(4, 4));
-  insertAlive(Position(4, 3));
-  insertAlive(Position(3, 4));
-  insertAlive(Position(5, 5));
-  insertAlive(Position(3, 5));
-  insertAlive(Position(5, 3));
-  insertAlive(Position(0, 0));
-  insertAlive(Position(0, 1));
-  */
-}
-
 void Lattice::insertAlive(Position* p) {
   lattice[p->getX()][p->getY()] = Cell(p, new StateAlive());
+}
+
+void Lattice::askToInsertCell() {
+  int x, y;
+  std::cout << "Enter the position (row column) to insert a live cell: ";
+  std::cin >> x >> y;
+  if (x < 0 || x >= row || y < 0 || y >= col) {
+    std::cout << "Invalid position." << std::endl;
+  } else {
+    Position position(x, y);
+    insertAlive(&position);
+  }
 }
 
 void Lattice::setCell(const Position* p, Cell& cell) {
@@ -132,14 +131,33 @@ void Lattice::switchOnlyPopulationMode() {
 }
 
 void Lattice::saveIntoAFile() {
-  std::cout << "Saved lattice into a file!" << std::endl;
+    std::string filename;
+  std::cout << "Enter filename> ";
+  std::cin >> filename;
+
+  std::ofstream file("saved-simulations/" + filename + ".txt", std::ios::out);
+  if (!file.is_open()) {
+    throw std::runtime_error("Error opening the file");
+  }
+
+  file << row << std::endl;
+  file << col << std::endl;
+
+  for (int i = 0; i < row; ++i) {
+    for (int j = 0; j < col; ++j) {
+      file << lattice[i][j].getStateInt();
+    }
+    file << std::endl;
+  }
+
+  std::cout << "Saved in: saved-simulations/" + filename + ".txt" << std::endl;
 }
 
 void Lattice::print() {
-  std::cout << "Iteration: \t" << this->currentIteration;
-  std::cout << " Population: \t" << this->population();
-  std::cout << " Size: \t" << this->row << " x " << this->col << std::endl;
-  
+  std::cout <<  "| Iteration: \t" << this->currentIteration;
+  std::cout << " | Population: \t" << this->population();
+  std::cout << " | Size: \t" << this->row << " x " << this->col << " |" << std::endl;
+
   if (!this->onlyPopulationMode) {
     this->printLattice();
   }

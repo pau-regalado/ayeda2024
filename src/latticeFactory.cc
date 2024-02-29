@@ -14,8 +14,8 @@ Lattice* LatticeFactory::generateLattice(int argc, char* argv[]) {
   bool rowCheck, colCheck = false;
   bool typeCheck = false;
   int initialCellState = 0;
-  std::cout << "3" << std::endl;
-  int row, col = 0;
+
+  int row = 0, col = 0;
   std::string filename = "";
   latticeTypes latticeType = latticeTypes::OPEN_BORDER;
   
@@ -58,7 +58,7 @@ Lattice* LatticeFactory::generateLattice(int argc, char* argv[]) {
     }
   }
 
-  if (rowCheck && colCheck && typeCheck) {
+  if (!filename.empty() || rowCheck && colCheck && typeCheck) {
     switch (latticeType) {
       case latticeTypes::PERIODIC_BORDER: {
         if (!filename.empty()) {

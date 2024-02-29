@@ -52,12 +52,6 @@ class Lattice{
     void nextFiveGenerations(void);
     void switchOnlyPopulationMode();
     void saveIntoAFile();
-
-    void expandNorth();
-    void expandSouth();
-    void expandWest();
-    void expandEast();
-    void updatePositions();
 };
 
 #endif

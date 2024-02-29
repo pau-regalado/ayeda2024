@@ -86,7 +86,7 @@ Cell& Lattice::operator[](const Position* p) {
 }
 
 Lattice::~Lattice() {
-  std::cout << "Destruccion base" << std::endl;
+  std::cout << "Adios" << std::endl;
 }
 
 void Lattice::startGeneration(void) {
@@ -136,8 +136,10 @@ void Lattice::saveIntoAFile() {
 }
 
 void Lattice::print() {
-  std::cout << "Iteration: " << this->currentIteration << std::endl;
-  std::cout << "Population: " << this->population() << std::endl;
+  std::cout << "Iteration: \t" << this->currentIteration;
+  std::cout << " Population: \t" << this->population();
+  std::cout << " Size: \t" << this->row << " x " << this->col << std::endl;
+  
   if (!this->onlyPopulationMode) {
     this->printLattice();
   }

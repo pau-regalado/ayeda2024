@@ -24,13 +24,11 @@ void LatticeNonBorders::resetExpansionStatus() {
 LatticeNonBorders::~LatticeNonBorders(){}
 
 void LatticeNonBorders::nextGenerationSpecific(void) {
-    std::cout << "LIMPIA" << std::endl;
     this->expandBorders();
     this->resetExpansionStatus();
 }
 
 Cell& LatticeNonBorders::getCell(Position* p){
-    std::cout << "GETCELL" << std::endl;
     int x = p->getX();
     int y = p->getY();
     
@@ -59,7 +57,6 @@ void LatticeNonBorders::expandBorders() {
     if (this->checkEast) {
         this->expandEast();
     }
-    std::cout << "SALGO" << std::endl;
 }
 
 void LatticeNonBorders::checkExpandBorders(Position* p) {
@@ -75,47 +72,34 @@ void LatticeNonBorders::checkExpandBorders(Position* p) {
     if (p->getY() == this->col - 1) {
         this->checkEast = true;
     }
-    std::cout << "SALGO" << std::endl;
 }
 
 void LatticeNonBorders::expandNorth() {
-    std::cout << "EXPAND NORTH" << std::endl;
     this->lattice.insert(this->lattice.begin(), std::vector<Cell>(this->col));
     this->row++;
     this->updatePositions();
-    std::cout << "EXPAND NORTH CHECK" << std::endl;
-    //this->updateNorth();
 }
 
 void LatticeNonBorders::expandSouth() {
-    std::cout << "EXPAND SOUTH" << std::endl;
     this->lattice.insert(this->lattice.end(), std::vector<Cell>(this->col));
-    //this->updateSouth();
     this->row++;
     this->updatePositions();
-    std::cout << "EXPAND SOUTH CHECK" << std::endl;
 }
 
 void LatticeNonBorders::expandWest() {
-    std::cout << "EXPAND WEST" << std::endl;
     for(int i = 0; i < this->row; i++) {
         this->lattice[i].insert(this->lattice[i].begin(), Cell());
     }
-    //this->updateWest();
     this->col++;
     this->updatePositions();
-    std::cout << "EXPAND WEST CHECK" << std::endl;
 }
 
 void LatticeNonBorders::expandEast() {
-    std::cout << "EXPAND EAST" << std::endl;
     for(int i = 0; i < this->row; i++) {
         this->lattice[i].insert(this->lattice[i].end(), Cell());
     }
-    //this->updateWest();
     this->col++;
     this->updatePositions();
-    std::cout << "EXPAND EAST CHECK" << std::endl;
 }
 
 void LatticeNonBorders::updatePositions() {

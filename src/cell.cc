@@ -47,7 +47,6 @@ int Cell::countAliveNeighbours(Lattice& lattice) {
   for (Position offset: neighbours ) {
     alives += lattice.getCell(new Position(*(this->position) + offset)).getStateInt();
   }
-  //std::cout << "i was here 1" << std::endl;
   return alives;
 }
 

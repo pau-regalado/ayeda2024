@@ -4,6 +4,7 @@
 #include <cstring>
 
 #include "../include/latticeFactory.h"
+#include "../include/simulator.h"
 
 int main(int argc, char* argv[]) {
     
@@ -11,11 +12,13 @@ int main(int argc, char* argv[]) {
   LatticeFactory latticeFactory;
   try {
     lattice = latticeFactory.generateLattice(argc, argv);
-    lattice->startGeneration();
   } catch (const std::exception& e) {
-      std::cerr << "Error: " << e.what() << std::endl;
-      return 1;
+    std::cerr << "Error: " << e.what() << std::endl;
+    return 1;
   }
+
+  Simulator simulator(lattice);
+  simulator.start();
   
   return 0;
 }

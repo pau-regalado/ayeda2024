@@ -10,7 +10,7 @@
 #include "lattice.h"
 #include "cell.h"
 
-enum latticeTypes { OPEN_BORDER, PERIODIC_BORDER, REFLECTIVE_BORDER };
+enum latticeTypes { OPEN_BORDER, PERIODIC_BORDER, REFLECTIVE_BORDER, NON_BORDERS };
 
 class LatticeFactory {
   private:

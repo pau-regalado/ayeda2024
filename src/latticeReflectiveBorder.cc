@@ -1,10 +1,12 @@
 #include "../include/latticeReflectiveBorder.h"
 
 LatticeReflectiveBorder::LatticeReflectiveBorder(int row, int col): Lattice(row, col){}
+LatticeReflectiveBorder::LatticeReflectiveBorder(std::string filename): Lattice(filename){}
 
 LatticeReflectiveBorder::~LatticeReflectiveBorder(){}
 
 Cell& LatticeReflectiveBorder::getCell(Position p){
+  std::cout << "Hola";
   int x = p.getX();
   int y = p.getY();
   if (x < 0){
@@ -39,6 +41,7 @@ Cell& LatticeReflectiveBorder::getCell(Position p){
       x = this->row - 1;
     }
   }
+  //std::cout << y << x;
   return this->lattice[x][y];
 }
 

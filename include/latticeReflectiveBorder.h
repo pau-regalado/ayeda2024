@@ -7,6 +7,7 @@
 class LatticeReflectiveBorder: public Lattice{
   public:
     LatticeReflectiveBorder(int row, int col);
+    LatticeReflectiveBorder(std::string filename);
     ~LatticeReflectiveBorder();
 
     Cell& getCell(Position);

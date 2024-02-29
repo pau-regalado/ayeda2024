@@ -7,6 +7,7 @@
 class LatticePeriodicBorder: public Lattice{
   public:
     LatticePeriodicBorder(int row, int col);
+    LatticePeriodicBorder(std::string filename);
     ~LatticePeriodicBorder();
 
     Cell& getCell(Position);

@@ -9,11 +9,11 @@ LIB     := lib
 LIBRARIES   := 
 EXECUTABLE  := main
 PARAMS	:= -size 10 10 -border open 0
-PARAMS1	:= -size 10 10 -border reflective -init ../dataFile/file2.txt
+PARAMSFILE	:= -size 10 10 -border reflective -init file2.txt
 SOURCES := $(wildcard $(SRC)/*.cc)
 OBJS	:= $(patsubst $(SRC)/%.cc,$(BUILD)/%.o,$(SOURCES))
 
-.PHONY: all project run clean
+.PHONY: all project run clean file
 
 all: $(BIN)/$(EXECUTABLE)
 
@@ -33,6 +33,10 @@ project:
 run:
 	@echo "🚀 Executing..."
 	./$(BIN)/$(EXECUTABLE) $(PARAMS)
+
+file:
+	@echo "🚀 Executing..."
+	./$(BIN)/$(EXECUTABLE) $(PARAMSFILE)
 
 clean:
 	@echo "🧹 Clearing..."

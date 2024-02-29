@@ -7,6 +7,7 @@
 class LatticeOpenBorder: public Lattice{
   public:
     LatticeOpenBorder(int row, int col, int initialCellState = 0);
+    LatticeOpenBorder(std::string filename, int initialCellState = 0);
     ~LatticeOpenBorder();
 
     Cell& getCell(Position);
@@ -14,7 +15,7 @@ class LatticeOpenBorder: public Lattice{
     std::string getName(void){return "Open";}
 
     private:
-      Cell border;
+      Cell* border;
 };
 
 #endif

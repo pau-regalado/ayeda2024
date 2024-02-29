@@ -13,10 +13,11 @@ Lattice* LatticeFactory::generateLattice(int argc, char* argv[]) {
   bool rowCheck, colCheck = false;
   bool typeCheck = false;
   int initialCellState = 0;
-
+  std::cout << "3" << std::endl;
   int row, col = 0;
   std::string filename = "";
   latticeTypes latticeType = latticeTypes::OPEN_BORDER;
+  
 
   for (int i = 1; i < argc; ++i) {
     if (strcmp(argv[i], "-size") == 0 && i + 1 < argc) {
@@ -48,6 +49,7 @@ Lattice* LatticeFactory::generateLattice(int argc, char* argv[]) {
         }
       }
     } else if (strcmp(argv[i], "-init") == 0 && i + 1 < argc) {
+      std::cout << "file" << std::endl;
       filename = argv[++i];
     }
   }
@@ -55,16 +57,27 @@ Lattice* LatticeFactory::generateLattice(int argc, char* argv[]) {
   if (rowCheck && colCheck && typeCheck) {
     switch (latticeType) {
       case latticeTypes::PERIODIC_BORDER: {
-        std::cout << "Periodic: " << std::endl;
-        this->lattice = new LatticePeriodicBorder(row, col);
+        if (!filename.empty()) {
+          this->lattice = new LatticePeriodicBorder(filename);
+        } else {
+          this->lattice = new LatticePeriodicBorder(row, col);
+        }          
         break;
       };
       case latticeTypes::REFLECTIVE_BORDER: {
-        this->lattice = new LatticeReflectiveBorder(row, col);
+        if (!filename.empty()) {
+          this->lattice = new LatticeReflectiveBorder(filename);
+        } else {
+          this->lattice = new LatticeReflectiveBorder(row, col);
+        } 
         break;
       };
       case latticeTypes::OPEN_BORDER: {
-        this->lattice = new LatticeOpenBorder(row, col, initialCellState);
+        if (!filename.empty()) {
+          this->lattice = new LatticeOpenBorder(filename);
+        } else {
+          this->lattice = new LatticeOpenBorder(row, col, initialCellState);
+        } 
         break;
       };
     default:
@@ -73,41 +86,6 @@ Lattice* LatticeFactory::generateLattice(int argc, char* argv[]) {
   } else {
     throw std::exception();
   }
-
-  if (!filename.empty()) {
-    buildLatticeFromFile(filename);
-  }
   return lattice;
 }
 
-void LatticeFactory::buildLatticeFromFile(std::string filename) {
-  std::ifstream file("dataFile/" + filename);
-    if (!file.is_open()) {
-      throw std::runtime_error("Error al abrir el archivo.");
-    }
-
-    int row;
-    file >> row;
-    int col;
-    file >> col;
-
-    std::string line;
-    file >> line;
-
-    for (int i = 0; i < row; ++i) {
-      for (int i = 0; i < col; ++i) {
-        if (line[i] == '0') {
-            State* state = new StateDead(); 
-            Position position(i);
-            Cell cell(position, state);
-            this->lattice->setCell(position, cell);
-        } else if (line[i] == '1') {
-            State* state = new StateAlive(); 
-            Position position(i);
-            Cell cell(position, state);
-        } else {
-            throw std::runtime_error("El archivo contiene datos no válidos.");
-        }
-      }
-    }
-}

@@ -1,11 +1,11 @@
 #include "../include/latticePeriodicBorder.h"
 
 LatticePeriodicBorder::LatticePeriodicBorder(int row, int col): Lattice(row, col){}
+LatticePeriodicBorder::LatticePeriodicBorder(std::string filename): Lattice(filename){}
 
 LatticePeriodicBorder::~LatticePeriodicBorder(){}
 
 Cell& LatticePeriodicBorder::getCell(Position p){
-  //std::cout << "i was here" << std::endl;
   int x = p.getX();
   int y = p.getY();
   if (x < 0) {

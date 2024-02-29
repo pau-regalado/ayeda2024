@@ -17,8 +17,8 @@ class LatticeNonBorders: public Lattice {
     void nextGenerationSpecific(void);
 
     void resetExpansionStatus();
-
-    void expandBorders(Position* p);
+    void checkExpandBorders(Position* p);
+    void expandBorders();
     void expandNorth();
     void expandSouth();
     void expandWest();
@@ -28,6 +28,8 @@ class LatticeNonBorders: public Lattice {
 
     private:
       bool expandedNorth, expandedSouth, expandedWest, expandedEast; 
+      bool checkNorth, checkSouth, checkWest, checkEast;
+      Cell border;
 };
 
 #endif

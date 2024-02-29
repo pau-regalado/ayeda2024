@@ -14,12 +14,18 @@ void LatticeNonBorders::resetExpansionStatus() {
     this->expandedSouth = false;
     this->expandedWest = false;
     this->expandedEast = false;
+    
+    this->checkNorth = false;
+    this->checkSouth = false;
+    this->checkWest = false;
+    this->checkEast = false;
 }
 
 LatticeNonBorders::~LatticeNonBorders(){}
 
 void LatticeNonBorders::nextGenerationSpecific(void) {
     std::cout << "LIMPIA" << std::endl;
+    this->expandBorders();
     this->resetExpansionStatus();
 }
 
@@ -27,36 +33,49 @@ Cell& LatticeNonBorders::getCell(Position* p){
     std::cout << "GETCELL" << std::endl;
     int x = p->getX();
     int y = p->getY();
+    
     if (x < 0 || x >= row || y < 0 || y >= col) {
-        (x < 0) ? x++ : x;
-        (x >= row) ? x = row : x;
-        (y < 0) ? y++ : y;
-        (y >= col) ? y = col : y;
-        this->expandBorders(p);
-        Position* pos = new Position(x, y);
-        Cell c(pos, new StateDead());
-        return c;
+        return this->border;
+    }
+
+    if (x == 0 || x == row - 1|| y == 0 || y == col - 1) {
+        if (lattice[x][y].getStateInt() == 1) {
+            this->checkExpandBorders(p);
+        }
     }
     return lattice[x][y];
 }
 
-void LatticeNonBorders::expandBorders(Position* p) {
-    if (!this->expandedWest && p->getX() < 0) {
-        this->expandWest();
-        this->expandedWest = true;
-    }
-    if (!this->expandedEast && p->getX() >= this->col) {
-        this->expandEast();
-        this->expandedEast = true;
-    }
-    if (!this->expandedNorth && p->getY() < 0) {
+void LatticeNonBorders::expandBorders() {
+    if (this->checkNorth) {
         this->expandNorth();
-        this->expandedNorth = true;
     }
-    if (!this->expandedSouth && p->getY() >= this->row) {
+    if (this->checkSouth) {
         this->expandSouth();
-        this->expandedSouth = true;
     }
+    if (this->checkWest) {
+        this->expandWest();
+    }
+    if (this->checkEast) {
+        this->expandEast();
+    }
+    std::cout << "SALGO" << std::endl;
+}
+
+void LatticeNonBorders::checkExpandBorders(Position* p) {
+    if (p->getX() == 0) {
+        this->checkNorth = true;
+    }
+    if (p->getX() == this->row - 1) {
+        this->checkSouth = true;
+    }
+    if (p->getY() == 0) {
+        this->checkWest = true;
+    }
+    if (p->getY() == this->col - 1) {
+        this->checkEast = true;
+    }
+    std::cout << "SALGO" << std::endl;
 }
 
 void LatticeNonBorders::expandNorth() {

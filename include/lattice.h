@@ -23,6 +23,10 @@ class Lattice{
   public:
     Lattice(int row = DEFAULT_SIZE, int col = DEFAULT_SIZE);
     Lattice(std::string filename);
+
+    Lattice(const Lattice& other); // Constructor de copia
+    Lattice& operator=(const Lattice& other); // Operador de asignación
+
     ~Lattice();
 
     void buildLattice(int row, int col);
@@ -48,6 +52,12 @@ class Lattice{
     void nextFiveGenerations(void);
     void switchOnlyPopulationMode();
     void saveIntoAFile();
+
+    void expandNorth();
+    void expandSouth();
+    void expandWest();
+    void expandEast();
+    void updatePositions();
 };
 
 #endif

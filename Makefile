@@ -9,7 +9,7 @@ LIB     := lib
 LIBRARIES   := 
 EXECUTABLE  := main
 PARAMS	:= -size 30 -border periodic
-PARAMS1	:= -size 30 -border reflective -init ../dataFile/file2.txt
+PARAMS1	:= -size 30 -border reflective -init ../dataFile/file1.txt
 SOURCES := $(wildcard $(SRC)/*.cc)
 OBJS	:= $(patsubst $(SRC)/%.cc,$(BUILD)/%.o,$(SOURCES))
 

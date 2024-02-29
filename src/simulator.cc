@@ -50,6 +50,7 @@ char Simulator::showMenuAndAskForOption() {
   std::cout << "c) Switch only population mode" << std::endl;
   std::cout << "s) Save lattice" << std::endl;
   std::cout << "i) Insert a cell" << std::endl;
+  std::cout << "x) Exit" << std::endl;
   std::cout << "opt> ";
 
   std::cin >> opt;

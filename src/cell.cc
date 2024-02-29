@@ -44,8 +44,12 @@ void Cell::updateState() {
 
 int Cell::countAliveNeighbours(Lattice& lattice) {
   int alives = 0;
+  /*
   for (Position offset: neighbours ) {
     alives += lattice.getCell(new Position(*(this->position) + offset)).getStateInt();
+  }*/
+  for (int i = 0; i < neighbours.size(); i++ ) {
+    alives += lattice.getCell(new Position(*(this->position) + neighbours[i])).getStateInt();
   }
   return alives;
 }

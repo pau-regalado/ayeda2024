@@ -24,9 +24,6 @@ class Lattice{
     Lattice(int row = DEFAULT_SIZE, int col = DEFAULT_SIZE);
     Lattice(std::string filename);
 
-    Lattice(const Lattice& other);
-    Lattice& operator=(const Lattice& other);
-
     ~Lattice();
 
     void buildLattice(int row, int col);

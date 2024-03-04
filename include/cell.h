@@ -17,7 +17,7 @@ class Cell{
                                          { 1, -1}, { 1, 0}, { 1, 1}};
 
   public:
-  
+
     Cell();
     Cell(Position* position, State* estado);
     ~Cell(void);
@@ -30,10 +30,11 @@ class Cell{
     Position getPosition(void) const;
     Position getPosition(void);
     
-    void updateState();
-    int nextState(Lattice& lattice);
+    virtual int nextState(Lattice& lattice) = 0;
+    virtual void updateState();
+    //virtual ostream& display(ostream&) = 0;
     int countAliveNeighbours(Lattice& lattice);
-
+    //friend ostream& operator<<(ostream&, const Cell&);
     friend std::ostream& operator<<(std::ostream& os, const Cell& cell);
 };
 #endif

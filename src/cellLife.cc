@@ -44,15 +44,12 @@ void Cell::updateState() {
 }
 
 int Cell::countAliveNeighbours(Lattice& lattice) {
-  int alives = 0;
-  /*
-  for (Position offset: neighbours ) {
-    alives += lattice.getCell(new Position(*(this->position) + offset)).getStateInt();
-  }*/
+  /*int alives = 0;
   for (int i = 0; i < neighbours.size(); i++ ) {
-    alives += lattice.getCell(new Position(*(this->position) + neighbours[i])).getStateInt();
+    PositionDim<1> position(this->getPosition()[0] + neighbours[i][0]);
+    alives += lattice.getCell(position).getStateInt();
   }
-  return alives;
+  return alives;*/
 }
 
 State* Cell::nextStateS(int vivas){

@@ -2,17 +2,19 @@
 #define _CELLACE_
 
 #include "../include/cell.h"
-#include "../include/stateDead.h"
 #include "../include/positionDim.h"
 
 class CellACE : public Cell {
 private:
-  PositionDim<1>* position;
+  std::vector<PositionDim<1>> neighbours = {{-1}, {1}};
 public:
-  CellACE(const PositionDim<1>& position, const State& state);
+  CellACE(const Position& position, const State& state);
   ~CellACE();
-  virtual int nextState(Lattice& lattice) = 0;
-  virtual void updateState();
+  // virtual int nextState(Lattice& lattice) = 0;
+  // virtual void updateState();
+  void updateState();
+  int getLeftNeightbourStateValue(Lattice& lattice);
+  int getRightNeightbourStateValue(Lattice& lattice);
 };
 
 #endif

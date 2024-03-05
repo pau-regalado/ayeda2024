@@ -11,23 +11,28 @@ class Cell{
   private:
     State* state;
     State* nState;
+    Position* position;
 
   public:
 
     Cell();
-    Cell(const State& state);
+    Cell(const Position& position, const State& state);
     ~Cell(void);
 
-    const State& getState(void) const;
+    State& getState(void) const;
+    void setState(State& state);
+
+    State& getNextState(void) const;
+    void setNextState(State& state);
+
     const int getStateInt(void) const;
-    void setState(State& estado);
-    void setPosition(Position* position);
-    Position getPosition(void);
+    
+    Position& getPosition(void) const;
+    void setPosition(const Position& position);
     
     virtual int nextState(Lattice& lattice) = 0;
     virtual void updateState();
-    virtual std::ostream& display(std::ostream&) = 0;
-    virtual int countAliveNeighbours(Lattice& lattice) = 0;
+    std::ostream& display(std::ostream&) const;
     friend std::ostream& operator<<(std::ostream& os, const Cell& cell);
 };
 #endif

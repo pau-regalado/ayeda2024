@@ -16,6 +16,7 @@ public:
   ~CellLife();
   virtual int nextState(Lattice& lattice) = 0;
   virtual void updateState();
+  int countAliveNeighbours(Lattice& lattice);
 };
 
 #endif

@@ -27,7 +27,7 @@ class Lattice{
 
     void askToInsertCell();
     void insertAlive(Position*);
-    virtual Cell& getCell(Position* p) = 0; 
+    virtual Cell& getCell(Position& p) = 0; 
     virtual std::string getName(void) = 0;
     int getRow(void){ return row;}
     int getCol(void){ return col;}

@@ -1,60 +1,25 @@
 #include "../include/cellACE.h"
 #include "../include/stateDead.h"
+#include "../include/stateAlive.h"
 
-CellACE::CellACE(const PositionDim<1>& position, const State& state) : Cell(state) {
-  *(this->position) = position;
-}
+CellACE::CellACE(const Position& position, const State& state) : Cell(position, state) {}
 
 CellACE::~CellACE() {}
 
-int CellACE::nextState(Lattice& lattice) {
-    // nextState implementation
+/*int CellACE::nextState(Lattice& lattice) {
+  // nextState implementation
+}*/
+
+int CellACE::getLeftNeightbourStateValue(Lattice& lattice) {
+  PositionDim<1> position(this->getPosition()[0] + neighbours[0][0]);
+  return lattice.getCell(position).getStateInt();
+}
+
+int CellACE::getRightNeightbourStateValue(Lattice& lattice) {
+  PositionDim<1> position(this->getPosition()[0] + neighbours[1][0]);
+  return lattice.getCell(position).getStateInt();
 }
 
 void CellACE::updateState() {
-  
+  this->setState(this->getNextState());
 }
-
-/*
-const State& Cell::getState(void) const{
-  return *(this->state);
-}
-
-const int Cell::getStateInt(void) const{
-  return this->state->getState();
-}
-
-void Cell::setState(State& state){
-  this->state = &state;
-}
-
-void Cell::setPosition(Position* position){
-  this->position = position;
-}
-
-Position Cell::getPosition(void){
-  return *(this->position);
-}
-
-int Cell::nextState(Lattice& lattice) {
-  this->nState = this->state->nextState(this->countAliveNeighbours(lattice));
-  return 0;
-}
-
-void Cell::updateState() {
-  this->state = this->nState;
-}
-
-int Cell::countAliveNeighbours(Lattice& lattice) {
-  int alives = 0;
-
-  for (int i = 0; i < neighbours.size(); i++ ) {
-    alives += lattice.getCell(new Position(*(this->position) + neighbours[i])).getStateInt();
-  }
-  return alives;
-}
-
-std::ostream& operator<<(std::ostream& os, const Cell& cell){
-  os << cell.getState();
-  return os;
-}*/

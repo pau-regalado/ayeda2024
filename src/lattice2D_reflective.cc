@@ -5,7 +5,7 @@ Lattice2D_reflective::Lattice2D_reflective(std::string filename): Lattice(filena
 
 Lattice2D_reflective::~Lattice2D_reflective(){}
 
-Cell& Lattice2D_reflective::getCell(Position* p){
+Cell& Lattice2D_reflective::getCell(Position& p){
   int x = p->getX();
   int y = p->getY();
   if (x < 0){

@@ -1,13 +1,17 @@
-#ifndef _LATTICE1D_PERIODIC_ 
-#define _LATTICE1D_PERIODIC_
+#ifndef __LATTICE1D_PERIODIC__ 
+#define __LATTICE1D_PERIODIC__
 
-#include <iostream>
-#include "lattice1D.h"
+#include "../include/lattice1D.h"
+#include "../include/cell.h"
 
 class Lattice1D_periodic: public Lattice1D {
   public:
-    Lattice1D_periodic(): Lattice1D(){}
+    Lattice1D_periodic(int size): Lattice1D(){}
     ~Lattice1D_periodic(){}
+
+    Cell& getCell(int position);
+    const Cell& getCell(int position) const;
+    std::string getName(void){return "Periodic";}
 
 };
 

@@ -8,11 +8,9 @@
 #include <thread>
 
 #include "position.h"
-
 const int DEFAULT_SIZE = 10;
 
 class Cell;
-
 class Lattice{
   protected:
     int row, col; 
@@ -23,7 +21,6 @@ class Lattice{
   public:
     Lattice(int row = DEFAULT_SIZE, int col = DEFAULT_SIZE);
     Lattice(std::string filename);
-
     ~Lattice();
 
     void buildLattice(int row, int col);

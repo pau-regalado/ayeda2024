@@ -4,20 +4,12 @@
 #include <vector>
 #include <iostream>
 
-class Position{
-  private:
-    int x, y;
-  
-  public:
-    Position(int x = 0, int y = 0);
-    Position(const Position& p);
-    ~Position(void);
-
-    void setX(const int x);
-    int getX(void) const;
-    void setY(const int y);
-    int getY(void) const;
-    Position operator+(Position p);
+typedef int Coor_t;
+class Position {
+public:
+  // Operador de acceso a la i-ésima coordenada
+  virtual Coor_t operator[](unsigned int) const = 0;
 };
 
 #endif
+

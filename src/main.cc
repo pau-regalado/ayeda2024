@@ -8,7 +8,7 @@
 
 int main(int argc, char* argv[]) {
     
-  Lattice* lattice;
+  /*Lattice* lattice;
   LatticeFactory latticeFactory;
   try {
     lattice = latticeFactory.generateLattice(argc, argv);
@@ -18,7 +18,9 @@ int main(int argc, char* argv[]) {
   }
 
   Simulator simulator(lattice);
-  simulator.start();
+  simulator.start();*/
+
+  Position p;
   
   return 0;
 }

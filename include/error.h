@@ -2,18 +2,30 @@
 #include <string>
 
 class Error : public std::exception {
-private :
-  std::string message;
-
-public:
-  Error() {}
-  ~Error() {}
-  virtual std::string toString() = 0;
+  public:
+    Error() {}
+    ~Error() {}
+    virtual std::string what() = 0;
 };
 
 
 class Ac_Exception : public Error {
-  std::string toString() {
-    return "Invalid access to coordinates";
-  }
+  public:
+    std::string what() {
+      return "Invalid access to coordinates";
+    }
+};
+
+class ParsingException : public Error {
+  public:
+    std::string what() {
+      return "Error parsing arguments";
+    }
+};
+
+class BadArgumentException : public Error {
+  public:
+    std::string what() {
+      return "Bad arguments";
+    }
 };

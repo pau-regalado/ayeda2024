@@ -11,6 +11,7 @@
 #include "cell.h"
 
 enum latticeTypes { OPEN_BORDER, PERIODIC_BORDER, REFLECTIVE_BORDER, NON_BORDERS };
+enum cellTypes { ACE_30, ACE_100, LIFE_23_3, LIFE_51_346 };
 
 class LatticeFactory {
   private:

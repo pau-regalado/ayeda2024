@@ -2,36 +2,10 @@
 #include "../include/stateDead.h"
 #include "../include/stateAlive.h"
 
-CellLife::CellLife() {
-  this->position = new PositionDim<>();
-  this->state = new StateDead();
-}
-
-CellLife::CellLife(Position* position, State* state) {
-  this->position = position;
-  this->state = state; 
-}
-
 CellLife::~CellLife() {}
 
 int CellLife::nextState(Lattice& lattice) {
     // nextState implementation
-}
-
-const State& Cell::getState(void) const{
-  return *(this->state);
-}
-
-const int Cell::getStateInt(void) const{
-  return this->state->getState();
-}
-
-void Cell::setState(State& state){
-  this->state = &state;
-}
-
-void Cell::setPosition(Position* position){
-  this->position = position;
 }
 
 int Cell::nextState(Lattice& lattice) {

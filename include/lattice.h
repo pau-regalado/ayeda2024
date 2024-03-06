@@ -8,6 +8,7 @@
 #include <thread>
 
 #include "position.h"
+#include "factoryCell.h"
 const int DEFAULT_SIZE = 10;
 
 class Cell;
@@ -20,6 +21,7 @@ class Lattice{
 
   public:
     Lattice(int row = DEFAULT_SIZE, int col = DEFAULT_SIZE);
+    Lattice(const char* filename, const FactoryCell& f);
     Lattice(std::string filename);
     ~Lattice();
 

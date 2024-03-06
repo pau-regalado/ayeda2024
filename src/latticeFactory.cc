@@ -1,10 +1,12 @@
 #include "../include/latticeFactory.h"
+#include "../include/factoryCell.h"
 #include "../include/latticeOpenBorder.h"
 #include "../include/latticePeriodicBorder.h"
 #include "../include/latticeReflectiveBorder.h"
 #include "../include/latticeNonBorders.h"
 #include "../include/stateDead.h"
 #include "../include/stateAlive.h"
+#include "../include/error.h"
 
 LatticeFactory::LatticeFactory() {}
 
@@ -13,25 +15,34 @@ LatticeFactory::~LatticeFactory() {}
 Lattice* LatticeFactory::generateLattice(int argc, char* argv[]) {
   bool rowCheck, colCheck = false;
   bool typeCheck = false;
+  bool cellTypeCheck = false;
+  bool dimCheck = false;
   int initialCellState = 0;
 
-  int row = 0, col = 0;
+  int dim = 0, aux = 0;
   std::string filename = "";
   latticeTypes latticeType = latticeTypes::OPEN_BORDER;
+  cellTypes cellType = cellTypes::ACE_30;
   
+  std::vector<int> dims;
+
+  FactoryCell* factoryCell;
 
   for (int i = 1; i < argc; ++i) {
     if (strcmp(argv[i], "-size") == 0 && i + 1 < argc) {
-      row = std::stoi(argv[i + 1]);
-      if (row > 0) {
-        rowCheck = true;
+      if (dimCheck) {
+        for (int j = 0; j < dim; j++) {
+          aux = std::stoi(argv[i + 1]);
+          if (aux > 0) {
+            dims.push_back(aux);
+            i++;
+          } else {
+            throw ParsingException();
+          }
+        }
+      } else {
+        throw ParsingException();
       }
-      i++;
-      col = std::stoi(argv[i + 1]);
-      if (col > 0) {
-        colCheck = true;
-      }
-      i++;
     } else if (strcmp(argv[i], "-border") == 0 && i + 1 < argc) {
       char* rawBorderType = argv[++i];
       if (strcmp(rawBorderType, "periodic") == 0) {
@@ -55,14 +66,32 @@ Lattice* LatticeFactory::generateLattice(int argc, char* argv[]) {
     } else if (strcmp(argv[i], "-init") == 0 && i + 1 < argc) {
       std::cout << "file" << std::endl;
       filename = argv[++i];
+    } else if (strcmp(argv[i], "-dim") == 0 && i + 1 < argc) {
+      dim = std::stoi(argv[i + 1]);
+      if (dim > 0) {
+        dimCheck = true;
+      } else {
+        throw BadArgumentException();
+      }
+    } else if (strcmp(argv[i], "-cell") == 0 && i + 1 < argc) {
+      char* rawCellType = argv[++i];
+      if (strcmp(rawCellType, "Ace30") == 0) {
+        factoryCell = new FactoryCellACE30(); 
+      } else if (strcmp(rawCellType, "Ace100") == 0) {
+        factoryCell = new FactoryCellACE110(); 
+      } else if (strcmp(rawCellType, "Life23_3") == 0) {
+        factoryCell = new FactoryCellLife23_3(); 
+      } else if (strcmp(rawCellType, "Life51_346") == 0) {
+        factoryCell = new FactoryCellLife51_346(); 
+      }
     }
   }
 
-  if (!filename.empty() || rowCheck && colCheck && typeCheck) {
+  if (!filename.empty() || dimCheck && typeCheck) {
     switch (latticeType) {
       case latticeTypes::PERIODIC_BORDER: {
         if (!filename.empty()) {
-          this->lattice = new LatticePeriodicBorder(filename);
+          this->lattice = new LatticePeriodicBorder(filename, );
         } else {
           this->lattice = new LatticePeriodicBorder(row, col);
         }          

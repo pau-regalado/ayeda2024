@@ -12,7 +12,7 @@ class PositionDim: public Position {
   public:
     PositionDim(int sz, ...) {
       if(sz != Dim) {
-        throw Ac_Exception;
+        throw Ac_Exception();
       }
       va_list vl;
       va_start(vl, sz);

@@ -3,12 +3,12 @@
 #include <stdexcept>
 #include <cstring>
 
-#include "../include/factoryCell.h"
-#include "../include/positionDim.h"
+#include "../include/simulator.h"
+#include "../include/latticeFactory.h"
 
 int main(int argc, char* argv[]) {
     
-  /*Lattice* lattice;
+  Lattice* lattice;
   LatticeFactory latticeFactory;
   try {
     lattice = latticeFactory.generateLattice(argc, argv);
@@ -18,14 +18,6 @@ int main(int argc, char* argv[]) {
   }
 
   Simulator simulator(lattice);
-  simulator.start();*/
-
-  FactoryCell* f;
-  f = new FactoryCellACE30();
-
-  Cell* c1 = f->createCell(PositionDim<1>(1, {4, 6}), StateDead());
-
-  std::cout << "C1: " << c1 << " " << c1->getPosition()[0]<< std::endl;
-  
+  simulator.start();
   return 0;
 }

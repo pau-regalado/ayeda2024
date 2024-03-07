@@ -1,3 +1,6 @@
+#ifndef _ERROR_ 
+#define _ERROR_
+
 #include <exception>
 #include <string>
 
@@ -43,3 +46,5 @@ class InvalidCellTypeException : public Error {
       return "Invalid cell type";
     }
 };
+
+#endif

@@ -33,7 +33,7 @@ void Simulator::start() {
     break;
     }
     case 'i': {
-      lattice->askToInsertCell();
+      // lattice->askToInsertCell();
     break;
     }
     case 'x':

@@ -14,7 +14,8 @@ Lattice::Lattice(const char* filename, const FactoryCell& f) {
     throw std::runtime_error("Error al abrir el archivo.");
   }
 
-  this->buildLattice(file);
+  // this->buildLattice(file);
+  this->dataFile = &file;
 }
 
 

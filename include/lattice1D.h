@@ -13,13 +13,13 @@
   class Lattice1D : public Lattice {
     protected:
       int size; 
-      std::vector<Cell> lattice;
+      std::vector<Cell*> lattice;
 
     public:
       Lattice1D(const char* filename, const FactoryCell& f);
       ~Lattice1D();
 
-      void buildLattice(std::ifstream& file);
+      void buildLattice();
 
       // virtual Cell& getCell(int) = 0; 
       // virtual const Cell& getCell(int) const = 0;

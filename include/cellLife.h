@@ -10,12 +10,10 @@ private:
                                             { 0, -1},          { 0, 1},
                                             { 1, -1}, { 1, 0}, { 1, 1}};
 public:
-  CellLife(const Position& position, const State& state) : Cell(position, state){}
+  CellLife(const Position& position, const State& state);
   ~CellLife();
-  virtual int nextState(Lattice& lattice) = 0;
-  virtual void updateState();
+  // virtual int nextState(Lattice& lattice) = 0;
   int countAliveNeighbours(Lattice& lattice);
-  State* nextStateS(int vivas);
 };
 
 #endif

@@ -7,13 +7,13 @@
 class Lattice2D : public Lattice {
   protected:
     int row, col; 
-    std::vector<std::vector<Cell>> lattice;
+    std::vector<std::vector<Cell*>> lattice;
 
   public:
     Lattice2D(const char* filename, const FactoryCell& f);
     ~Lattice2D();
 
-    void buildLattice(std::ifstream& file);
+    void buildLattice();
     
     std::string getName(void) { return "Lattice 2D"; }
     int getRow(void){ return row;}

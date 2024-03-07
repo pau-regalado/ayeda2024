@@ -1,8 +1,8 @@
 #ifndef _POSITIONDIM_ 
 #define _POSITIONDIM_
 
-#include "../include/position.h"
-#include "../include/error.h"
+#include "position.h"
+#include "error.h"
 #include <stdarg.h>
 
 template <int Dim=2, class Coordinate_t=int>

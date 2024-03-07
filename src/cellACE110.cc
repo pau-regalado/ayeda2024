@@ -1,4 +1,5 @@
 #include "../include/cellACE110.h"
+#include "../include/lattice.h"
 
 CellACE110::CellACE110(const Position& position, const State& state)
   : CellACE(position, state) { }

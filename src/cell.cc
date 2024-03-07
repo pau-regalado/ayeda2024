@@ -1,10 +1,6 @@
 #include "../include/cell.h"
 #include "../include/stateDead.h"
 
-Cell::Cell() {
-  this->state = new StateDead();
-}
-
 Cell::Cell(const Position& position, const State& state){
   *(this->state) = state; 
   *(this->position) = position;
@@ -40,6 +36,10 @@ State& Cell::getNextState(void) const{
 
 void Cell::setNextState(State& state){
   this->nState = &state;
+}
+
+void Cell::updateState(){
+  this->state = this->nState;
 }
 
 Position& Cell::getPosition(void) const {

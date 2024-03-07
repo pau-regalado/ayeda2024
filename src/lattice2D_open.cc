@@ -1,7 +1,7 @@
 #include "../include/lattice2D_open.h"
 #include "../include/stateAlive.h"
 
-Lattice2D_open::Lattice2D_open(const char* filename, const FactoryCell& f, int initialCellState = 0)
+Lattice2D_open::Lattice2D_open(const char* filename, const FactoryCell& f, int initialCellState)
   : Lattice2D(filename, f) {
 
   if (initialCellState == 0) {
@@ -22,7 +22,7 @@ Cell& Lattice2D_open::getCell(const Position& position){
   if(position[0] < 0 || position[0] >= this->row || position[1] < 0 || position[1] >= this->col) {
     return *this->border;
   }
-  return this->lattice[position[0]][position[1]];
+  return *this->lattice[position[0]][position[1]];
 }
 // Getter constante, se usa en la mayoria del codigo
 // Devuelve la celula en la posicion indicada. OpenBorder no calcula nada
@@ -30,5 +30,5 @@ const Cell& Lattice2D_open::getCell(const Position& position) const{
   if(position[0] < 0 || position[0] >= this->row || position[1] < 0 || position[1] >= this->col) {
     return *this->border;
   }
-  return this->lattice[position[0]][position[1]];
+  return *this->lattice[position[0]][position[1]];
 }

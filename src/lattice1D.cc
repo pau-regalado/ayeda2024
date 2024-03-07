@@ -7,11 +7,11 @@
 Lattice1D::Lattice1D(const char* filename, const FactoryCell& f)
   : Lattice(filename, f) { }
 
-void Lattice1D::buildLattice(std::ifstream& file) {
+void Lattice1D::buildLattice() {
   // Por ahora es para descartar la primera linea del fichero, dimension
-  file >> this->size;
+  *dataFile >> this->size;
 
-  file >> this->size;
+  *dataFile >> this->size;
 
   this->lattice.resize(this->size);
   // for (int i = 0; i < this->size; i++) {
@@ -19,7 +19,7 @@ void Lattice1D::buildLattice(std::ifstream& file) {
   // }
 
   std::string line;
-  file >> line;
+  *dataFile >> line;
 
   for (int i = 0; i < size; ++i) {
     State* state;
@@ -41,18 +41,18 @@ Lattice1D::~Lattice1D() {
 
 void Lattice1D::calculateNextGeneration(void) {
   for (int i = 0; i < this->size; i++) {
-    this->lattice[i].nextState(*this);  
+    this->lattice[i]->nextState(*this);  
   }
  
   for (int i = 0; i < this->size; i++) {
-    this->lattice[i].updateState();
+    this->lattice[i]->updateState();
   }
 }
 
 std::size_t Lattice1D::getPopulation() const {
   std::size_t population = 0;
   for (int i = 0; i < this->size; i++) {
-      population += this->lattice[i].getStateInt();
+      population += this->lattice[i]->getStateInt();
   }
   return population;
 }
@@ -69,6 +69,6 @@ std::string Lattice1D::printLattice() {
 void Lattice1D::saveLatticeDataIntoAFile(std::ofstream& f) {
   f << this->size << std::endl; 
   for (int i = 0; i < this->size; i++) {
-    f << this->lattice[i].getStateInt();
+    f << this->lattice[i]->getStateInt();
   }
 }

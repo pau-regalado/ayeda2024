@@ -2,20 +2,11 @@
 #include "../include/stateDead.h"
 #include "../include/stateAlive.h"
 
+CellLife::CellLife(const Position& position, const State& state)
+    : Cell(position, state){}
+
 CellLife::~CellLife() {}
 
-int CellLife::nextState(Lattice& lattice) {
-    // nextState implementation
-}
-
-int CellLife::nextState(Lattice& lattice) {
-  this->nState = this->state->nextState(this->countAliveNeighbours(lattice));
-  return 0;
-}
-
-void CellLife::updateState() {
-  this->state = this->nState;
-}
 
 int CellLife::countAliveNeighbours(Lattice& lattice) {
   /*int alives = 0;
@@ -24,10 +15,6 @@ int CellLife::countAliveNeighbours(Lattice& lattice) {
     alives += lattice.getCell(position).getStateInt();
   }
   return alives;*/
+  return 0;
 }
 
-
-std::ostream& operator<<(std::ostream& os, const Cell& cell){
-  os << cell.getState();
-  return os;
-}

@@ -1,9 +1,10 @@
 #include "../include/latticeFactory.h"
 #include "../include/factoryCell.h"
-#include "../include/latticeOpenBorder.h"
-#include "../include/latticePeriodicBorder.h"
-#include "../include/latticeReflectiveBorder.h"
-#include "../include/latticeNonBorders.h"
+#include "../include/lattice2D_open.h"
+#include "../include/lattice1D_open.h"
+// #include "../include/latticePeriodicBorder.h"
+// #include "../include/latticeReflectiveBorder.h"
+// #include "../include/latticeNonBorders.h"
 #include "../include/stateDead.h"
 #include "../include/stateAlive.h"
 #include "../include/error.h"
@@ -45,7 +46,7 @@ Lattice* LatticeFactory::generateLattice(int argc, char* argv[]) {
       }
     } else if (strcmp(argv[i], "-border") == 0 && i + 1 < argc) {
       char* rawBorderType = argv[++i];
-      if (strcmp(rawBorderType, "periodic") == 0) {
+      /*if (strcmp(rawBorderType, "periodic") == 0) {
         latticeType = latticeTypes::PERIODIC_BORDER;
         typeCheck = true;
       } else if (strcmp(rawBorderType, "reflective") == 0) {
@@ -54,7 +55,8 @@ Lattice* LatticeFactory::generateLattice(int argc, char* argv[]) {
       } else if (strcmp(rawBorderType, "nonborders") == 0) {
         latticeType = latticeTypes::NON_BORDERS;
         typeCheck = true;
-      } else if (strcmp(rawBorderType, "open") == 0) {
+      } else */
+      if (strcmp(rawBorderType, "open") == 0) {
         if ( i + 1 < argc) {
           initialCellState = std::stoi(argv[++i]);
           if (initialCellState == 0 || initialCellState == 1) {
@@ -89,7 +91,7 @@ Lattice* LatticeFactory::generateLattice(int argc, char* argv[]) {
 
   if (!filename.empty() || dimCheck && typeCheck) {
     switch (latticeType) {
-      case latticeTypes::PERIODIC_BORDER: {
+      /*case latticeTypes::PERIODIC_BORDER: {
         if (!filename.empty()) {
           this->lattice = new LatticePeriodicBorder(filename, );
         } else {
@@ -112,12 +114,12 @@ Lattice* LatticeFactory::generateLattice(int argc, char* argv[]) {
           this->lattice = new LatticeReflectiveBorder(row, col);
         } 
         break;
-      };
+      };*/
       case latticeTypes::OPEN_BORDER: {
-        if (!filename.empty()) {
-          this->lattice = new LatticeOpenBorder(filename);
+        if (1) {
+          this->lattice = new Lattice1D_open(filename.c_str(), *factoryCell, 1);
         } else {
-          this->lattice = new LatticeOpenBorder(row, col, initialCellState);
+          this->lattice = new Lattice2D_open(filename.c_str(), *factoryCell, 1);
         } 
         break;
       };
@@ -127,6 +129,7 @@ Lattice* LatticeFactory::generateLattice(int argc, char* argv[]) {
   } else {
     throw std::exception();
   }
+  lattice->buildLattice();
   return lattice;
 }
 

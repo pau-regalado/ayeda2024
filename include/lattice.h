@@ -18,12 +18,13 @@ class Lattice{
     bool onlyPopulationMode;
     int currentIteration;
     const FactoryCell* cellFactory;
+    std::ifstream* dataFile;
 
   public:
     Lattice(const char* filename, const FactoryCell& f);
     virtual ~Lattice();
 
-    virtual void buildLattice(std::ifstream& file) = 0;
+    virtual void buildLattice() = 0;
 
     //virtual void insertAlive(const Position&) = 0;
 

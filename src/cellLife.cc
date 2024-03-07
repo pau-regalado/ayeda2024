@@ -8,16 +8,16 @@ int CellLife::nextState(Lattice& lattice) {
     // nextState implementation
 }
 
-int Cell::nextState(Lattice& lattice) {
+int CellLife::nextState(Lattice& lattice) {
   this->nState = this->state->nextState(this->countAliveNeighbours(lattice));
   return 0;
 }
 
-void Cell::updateState() {
+void CellLife::updateState() {
   this->state = this->nState;
 }
 
-int Cell::countAliveNeighbours(Lattice& lattice) {
+int CellLife::countAliveNeighbours(Lattice& lattice) {
   /*int alives = 0;
   for (int i = 0; i < neighbours.size(); i++ ) {
     PositionDim<1> position(this->getPosition()[0] + neighbours[i][0]);
@@ -26,13 +26,6 @@ int Cell::countAliveNeighbours(Lattice& lattice) {
   return alives;*/
 }
 
-State* Cell::nextStateS(int vivas){
-  if ((vivas == 2) || (vivas == 3)){
-      return new StateAlive();
-  } else {
-      return new StateDead();
-  }
-}
 
 std::ostream& operator<<(std::ostream& os, const Cell& cell){
   os << cell.getState();

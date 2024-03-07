@@ -15,6 +15,7 @@ public:
   virtual int nextState(Lattice& lattice) = 0;
   virtual void updateState();
   int countAliveNeighbours(Lattice& lattice);
+  State* nextStateS(int vivas);
 };
 
 #endif

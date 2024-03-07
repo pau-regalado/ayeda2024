@@ -2,7 +2,7 @@
 #include "../include/stateDead.h"
 #include "../include/stateAlive.h"
 
-CellACE::CellACE(const Position& position, const State& state) : Cell(position, state) {}
+CellACE::CellACE(const PositionDim<1>& position, const State& state) : Cell(position, state) {}
 
 CellACE::~CellACE() {}
 

@@ -6,15 +6,16 @@
 
 class Lattice1D_open: public Lattice1D {
   public:
-    Lattice1D_open(int size, int initialCellState = 0): Lattice1D(){}
+    Lattice1D_open(const char* filename, const FactoryCell& f, int initialCellState = 0): Lattice1D(filename, f){}
     ~Lattice1D_open(){}
 
-    Cell& getCell(int);
-    const Cell& getCell(int) const;
+    Cell& getCell(const Position& p);
+    const Cell& getCell(const Position& p) const;
     std::string getName(void){return "Open";}
+    void nextGenerationSpecific(void) {}
 
     private:
-      //CellACE border;
+      CellACE30 border;
 };
 
 #endif

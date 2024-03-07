@@ -10,6 +10,7 @@ public:
   ~CellLife23_3();
   int nextState(Lattice& lattice);
   void updateState();
+  State* nextStateS(int vivas);
 };
 
 #endif

@@ -6,49 +6,52 @@
 #include <string>
 #include <chrono>
 #include <thread>
+#include <fstream>
 
 #include "position.h"
 #include "factoryCell.h"
-const int DEFAULT_SIZE = 10;
 
 class Cell;
 class Lattice{
   protected:
-    int row, col; 
-    std::vector<std::vector<Cell>> lattice;
+
     bool onlyPopulationMode;
     int currentIteration;
 
   public:
-    Lattice(int row = DEFAULT_SIZE, int col = DEFAULT_SIZE);
     Lattice(const char* filename, const FactoryCell& f);
-    Lattice(std::string filename);
-    ~Lattice();
+    virtual ~Lattice();
 
-    void buildLattice(int row, int col);
+    virtual void buildLattice(std::ifstream& file) = 0;
 
-    void askToInsertCell();
-    void insertAlive(Position*);
-    virtual Cell& getCell(Position& p) = 0; 
-    virtual std::string getName(void) = 0;
-    int getRow(void){ return row;}
-    int getCol(void){ return col;}
+    //virtual void insertAlive(const Position&) = 0;
 
-    void setCell(const Position* p, Cell& cell);
+    void setCell(const Position& p, Cell& cell);
+    // void askToInsertCell();
 
     void print();
-    void printLattice();
-    friend std::ostream& operator<<(std::ostream& os, Lattice &g);
-    Cell& operator[](const Position*);
+    virtual std::string printLattice() = 0;
+    virtual std::string printSize() = 0;
 
-    int population();
-    void startGeneration(void);
-    void nextGeneration(void);
-    virtual void nextGenerationSpecific(void) = 0;
-    void calculateNextGeneration(void);
+    Cell& operator[](const Position&);
+    const Cell& operator[](const Position&) const;
+
+    // virtual std::ostream& display(std::ostream&) = 0;
+
+    void nextGeneration();
     void nextFiveGenerations(void);
     void switchOnlyPopulationMode();
     void saveIntoAFile();
+
+    friend std::ostream& operator<<(std::ostream& os, Lattice &g);
+
+    virtual std::size_t getPopulation() const = 0;
+    virtual void nextGenerationSpecific(void) = 0;
+    virtual void calculateNextGeneration(void) = 0;
+    virtual Cell& getCell(const Position& p) = 0;
+    virtual const Cell& getCell(const Position& p) const = 0;
+    virtual std::string getName(void) = 0;
+    virtual void saveLatticeDataIntoAFile(std::ofstream& f) = 0;
 };
 
 #endif

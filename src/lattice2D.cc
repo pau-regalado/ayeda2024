@@ -99,13 +99,6 @@ void Lattice::startGeneration(void) {
   }
 }
 
-void Lattice::nextGeneration(void) {
-  this->currentIteration++;
-  this->calculateNextGeneration();
-  this->nextGenerationSpecific();
-  this->print();
-}
-
 void Lattice::calculateNextGeneration(void) {
   for (int i = 0; i < this->row; i++) {
     for (int j = 0; j < this->col; j++) {

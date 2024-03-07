@@ -63,9 +63,11 @@ std::string Lattice1D::printLattice() {
     std::cout << this->lattice[i];
   }
   std::cout << "⬛" << std::endl;
+  return "";
 }
 
 void Lattice1D::saveLatticeDataIntoAFile(std::ofstream& f) {
+  f << this->size << std::endl; 
   for (int i = 0; i < this->size; i++) {
     f << this->lattice[i].getStateInt();
   }

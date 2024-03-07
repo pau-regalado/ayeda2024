@@ -1,57 +1,30 @@
-#ifndef __LATTICE__ 
-#define __LATTICE__
-
-#include <iostream>
-#include <vector>
-#include <string>
-#include <chrono>
-#include <thread>
+#ifndef __LATTICE_2D__ 
+#define __LATTICE_2D__
 
 #include "lattice.h"
-#include "position.h"
-
-const int DEFAULT_SIZE = 10;
-
-class Cell;
+#include "cell.h"
 
 class Lattice2D : public Lattice {
   protected:
     int row, col; 
     std::vector<std::vector<Cell>> lattice;
 
-
   public:
-    Lattice2D(int row = DEFAULT_SIZE, int col = DEFAULT_SIZE);
-    Lattice2D(std::string filename);
-
+    Lattice2D(const char* filename, const FactoryCell& f);
     ~Lattice2D();
 
-    void buildLattice(int row, int col);
-
-    void askToInsertCell();
-    void insertAlive(Position*);
-    virtual Cell& getCell(Position* p) = 0; 
-    virtual std::string getName(void) = 0;
+    void buildLattice(std::ifstream& file);
+    
+    std::string getName(void) { return "Lattice 2D"; }
     int getRow(void){ return row;}
     int getCol(void){ return col;}
 
-    void setCell(const Position* p, Cell& cell);
+    std::string printSize() { return std::to_string(row) + " x " + std::to_string(col); }
+    std::string printLattice();
 
-    void print();
-    void printLattice();
-    friend std::ostream& operator<<(std::ostream& os, Lattice2D &g);
-    Cell& operator[](const Position*);
-
-    void buildLattice(int row, int col);
-
-    int population();
-    void startGeneration(void);
-    void nextGeneration(void);
-    virtual void nextGenerationSpecific(void) = 0;
     void calculateNextGeneration(void);
-    void nextFiveGenerations(void);
-    void switchOnlyPopulationMode();
-    void saveIntoAFile();
+    void saveLatticeDataIntoAFile(std::ofstream& f);
+    std::size_t getPopulation() const;
 };
 
 #endif

@@ -15,6 +15,7 @@ class State {
     friend std::ostream& operator<<(std::ostream& os, const State &s);
 
     State(const State& other) { state = other.state; }
+    virtual State* clone() const = 0;
 };
 
 #endif

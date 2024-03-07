@@ -29,7 +29,7 @@ Cell& Lattice::operator[](const Position& p) {
 }
 
 void Lattice::setCell(const Position& p, Cell& cell) {
-  std::cout << "EN SET CELL" << std::endl;
+  //std::cout << "EN SET CELL" << std::endl;
   this->getCell(p) = cell;
 }
 

@@ -3,7 +3,7 @@
 
 Cell::Cell(Position& position, State& state){
   std::cout << "Initializing cell " <<  std::endl;
-  this->state = &state;
+  this->state = state.clone();
   this->position = position.clone();
   std::cout << "Initialized cell " << this->state->print() << " pos " << this->position->operator[](0) <<  std::endl;
 }

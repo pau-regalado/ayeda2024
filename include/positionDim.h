@@ -11,7 +11,7 @@ class PositionDim: public Position {
     Coordinate_t Coordinates[Dim];
   public:
     PositionDim(int sz, ...) {
-      std::cout << "En position sz = " << sz << std::endl;
+      //std::cout << "En position sz = " << sz << std::endl;
       va_list vl;
       va_start(vl, sz);
       for(int d = 0; d < sz; d++) {       
@@ -26,7 +26,7 @@ class PositionDim: public Position {
       //   throw Ac_Exception();
       // }
       // std::cout << "COJO LO DE LA POS " << i << std::endl;
-      std::cout << "TAAMAÑO COORD " << this->Coordinates[i] << std::endl;
+      //std::cout << "TAAMAÑO COORD " << this->Coordinates[i] << std::endl;
       return this->Coordinates[i];
     }
 

@@ -8,9 +8,12 @@ CellACE30::~CellACE30() { }
 int CellACE30::nextState(Lattice& lattice) {
   int L = this->getLeftNeightbourStateValue(lattice);
   int R = this->getRightNeightbourStateValue(lattice);
-  // Formula
-  if (L) {
-    this->setNextState(*(new StateDead()));
+  int C = this->getStateInt();
+  int S1 = C * R;
+  int S2 = C + R + L;
+  int S  = (S1 + S2) % 2;
+  if (S) {
+    this->setNextState(*(new StateAlive()));
   } else {
     this->setNextState(*(new StateDead()));
   }

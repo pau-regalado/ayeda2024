@@ -44,7 +44,7 @@ void Lattice1D::buildLattice() {
     Cell* c = this->cellFactory->createCell(*pos, *state);
     // std::cout << "CELULA CREADA" << std::endl;
     this->setCell(*pos, *c);
-    std::cout << "CELULA GUARDADA" << std::endl;
+    //std::cout << "CELULA GUARDADA" << std::endl;
   }
 }
 

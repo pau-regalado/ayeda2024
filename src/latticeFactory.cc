@@ -1,12 +1,15 @@
 #include "../include/latticeFactory.h"
 #include "../include/factoryCell.h"
 #include "../include/lattice2D_open.h"
+
 #include "../include/lattice1D_open.h"
-// #include "../include/latticePeriodicBorder.h"
-// #include "../include/latticeReflectiveBorder.h"
-// #include "../include/latticeNonBorders.h"
+#include "../include/lattice1D_reflective.h"
+#include "../include/lattice1D_periodic.h"
+#include "../include/lattice1D_noBorder.h"
+
 #include "../include/stateDead.h"
 #include "../include/stateAlive.h"
+
 #include "../include/error.h"
 
 LatticeFactory::LatticeFactory() {}
@@ -47,7 +50,7 @@ Lattice* LatticeFactory::generateLattice(int argc, char* argv[]) {
       std::cout << "SIZE = " << aux << std::endl;
     } else if (strcmp(argv[i], "-border") == 0 && i + 1 < argc) {
       char* rawBorderType = argv[++i];
-      /*if (strcmp(rawBorderType, "periodic") == 0) {
+      if (strcmp(rawBorderType, "periodic") == 0) {
         latticeType = latticeTypes::PERIODIC_BORDER;
         typeCheck = true;
       } else if (strcmp(rawBorderType, "reflective") == 0) {
@@ -56,8 +59,7 @@ Lattice* LatticeFactory::generateLattice(int argc, char* argv[]) {
       } else if (strcmp(rawBorderType, "nonborders") == 0) {
         latticeType = latticeTypes::NON_BORDERS;
         typeCheck = true;
-      } else */
-      if (strcmp(rawBorderType, "open") == 0) {
+      } else if (strcmp(rawBorderType, "open") == 0) {
         if ( i + 1 < argc) {
           initialCellState = std::stoi(argv[++i]);
           if (initialCellState == 0 || initialCellState == 1) {
@@ -95,30 +97,29 @@ Lattice* LatticeFactory::generateLattice(int argc, char* argv[]) {
 
   if (!filename.empty() || dimCheck && typeCheck) {
     switch (latticeType) {
-      /*case latticeTypes::PERIODIC_BORDER: {
+      case latticeTypes::PERIODIC_BORDER: {
         if (!filename.empty()) {
-          this->lattice = new LatticePeriodicBorder(filename, );
+          this->lattice = new Lattice1D_periodic(filename.c_str(), *factoryCell);
         } else {
-          this->lattice = new LatticePeriodicBorder(row, col);
+          // this->lattice = new LatticePeriodicBorder(row, col);
         }          
         break;
       };
       case latticeTypes::NON_BORDERS: {
         if (!filename.empty()) {
-          this->lattice = new LatticeNonBorders(filename);
+          this->lattice = new Lattice1D_noBorder(filename.c_str(), *factoryCell);
         } else {
-          this->lattice = new LatticeNonBorders(row, col);
+          // this->lattice = new LatticeNonBorders(row, col);
         }          
         break;
       };
       case latticeTypes::REFLECTIVE_BORDER: {
         if (!filename.empty()) {
-          this->lattice = new LatticeReflectiveBorder(filename);
+          this->lattice = new Lattice1D_reflective(filename.c_str(), *factoryCell);
         } else {
-          this->lattice = new LatticeReflectiveBorder(row, col);
         } 
         break;
-      };*/
+      };
       case latticeTypes::OPEN_BORDER: {
         if (1) {
           std::cout << "Creo OPEN 1D" << std::endl;

@@ -10,6 +10,7 @@ class StateAlive: public State {
     ~StateAlive(){std::cout << "Destruyo viva" <<  std::endl;}
     State* nextState(int vivas);
     std::string print() const;
+    State* clone() const {return new StateAlive();}
 };
 
 #endif

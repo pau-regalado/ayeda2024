@@ -9,7 +9,7 @@ LIB     := lib
 LIBRARIES   := 
 EXECUTABLE  := main
 PARAMS	:= -size 10 10 -border open 1
-PARAMSFILE	:=  -dim 1 -size 25 -cell Ace110 -border open 1 -init 1D_25.txt
+PARAMSFILE	:=  -dim 1 -size 25 -cell Ace30 -border nonborders -init 1D_25.txt
 SOURCES := $(wildcard $(SRC)/*.cc)
 OBJS	:= $(patsubst $(SRC)/%.cc,$(BUILD)/%.o,$(SOURCES))
 

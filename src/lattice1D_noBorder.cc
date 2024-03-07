@@ -7,9 +7,7 @@ Lattice1D_noBorder::Lattice1D_noBorder(const char* filename, const FactoryCell& 
   this->resetExpansionStatus();
 }
 
-Lattice1D_noBorder::~Lattice1D_noBorder(){
-  std::cout << "Destruyo Lattice1D_noBorder" << std::endl; 
-}
+Lattice1D_noBorder::~Lattice1D_noBorder(){ }
 
 void Lattice1D_noBorder::resetExpansionStatus() {
   this->expandedWest = false;

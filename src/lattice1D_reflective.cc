@@ -2,12 +2,9 @@
 #include "../include/stateAlive.h"
 
 Lattice1D_reflective::Lattice1D_reflective(const char* filename, const FactoryCell& f)
-  : Lattice1D(filename, f) {
-}
+  : Lattice1D(filename, f) { }
 
-Lattice1D_reflective::~Lattice1D_reflective(){
-  std::cout << "Destruyo Lattice1D_reflective" << std::endl; 
-}
+Lattice1D_reflective::~Lattice1D_reflective(){ }
 
 // Devuelve la celula en la posicion indicada. OpenBorder no calcula nada
 Cell& Lattice1D_reflective::getCell(const Position& position){

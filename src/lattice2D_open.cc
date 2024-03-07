@@ -13,9 +13,7 @@ Lattice2D_open::Lattice2D_open(const char* filename, const FactoryCell& f, int i
   }
 }
 
-Lattice2D_open::~Lattice2D_open(){
-  std::cout << "Destruyo Lattice2D_open" << std::endl; 
-}
+Lattice2D_open::~Lattice2D_open(){ }
 
 // Devuelve la celula en la posicion indicada. OpenBorder no calcula nada
 Cell& Lattice2D_open::getCell(const Position& position){

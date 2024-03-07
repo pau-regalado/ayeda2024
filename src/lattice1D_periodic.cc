@@ -5,9 +5,7 @@ Lattice1D_periodic::Lattice1D_periodic(const char* filename, const FactoryCell& 
   : Lattice1D(filename, f) {
 }
 
-Lattice1D_periodic::~Lattice1D_periodic(){
-  std::cout << "Destruyo Lattice1D_periodic" << std::endl; 
-}
+Lattice1D_periodic::~Lattice1D_periodic(){ }
 
 // Devuelve la celula en la posicion indicada. OpenBorder no calcula nada
 Cell& Lattice1D_periodic::getCell(const Position& position){

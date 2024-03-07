@@ -5,9 +5,7 @@ Lattice2D_reflective::Lattice2D_reflective(const char* filename, const FactoryCe
   : Lattice2D(filename, f) {
 }
 
-Lattice2D_reflective::~Lattice2D_reflective(){
-  std::cout << "Destruyo Lattice2D_reflective" << std::endl; 
-}
+Lattice2D_reflective::~Lattice2D_reflective(){ }
 
 // Devuelve la celula en la posicion indicada. reflectiveBorder no calcula nada
 Cell& Lattice2D_reflective::getCell(const Position& position){

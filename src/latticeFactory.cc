@@ -51,7 +51,6 @@ Lattice* LatticeFactory::generateLattice(int argc, char* argv[]) {
       } else {
         throw ParsingException();
       }
-      std::cout << "SIZE = " << aux << std::endl;
     } else if (strcmp(argv[i], "-border") == 0 && i + 1 < argc) {
       char* rawBorderType = argv[++i];
       if (strcmp(rawBorderType, "periodic") == 0) {
@@ -68,14 +67,13 @@ Lattice* LatticeFactory::generateLattice(int argc, char* argv[]) {
           initialCellState = std::stoi(argv[++i]);
           if (initialCellState == 0 || initialCellState == 1) {
             latticeType = latticeTypes::OPEN_BORDER;
-            std::cout << "BORDER = OPEN" << std::endl;
             typeCheck = true;
           }
         }
       }
     } else if (strcmp(argv[i], "-init") == 0 && i + 1 < argc) {
       filename = argv[++i];
-      std::cout << "FILE = " << filename << std::endl;
+      std::cout << "Created from file: " << filename << std::endl;
     } else if (strcmp(argv[i], "-dim") == 0 && i + 1 < argc) {
       dim = std::stoi(argv[i + 1]);
       if (dim > 0) {
@@ -83,13 +81,11 @@ Lattice* LatticeFactory::generateLattice(int argc, char* argv[]) {
       } else {
         throw BadArgumentException();
       }
-      std::cout << "DIM = " << dim << std::endl;
     } else if (strcmp(argv[i], "-cell") == 0 && i + 1 < argc) {
       char* rawCellType = argv[++i];
       if (strcmp(rawCellType, "Ace30") == 0) {
         factoryCell = new FactoryCellACE30(); 
       } else if (strcmp(rawCellType, "Ace110") == 0) {
-        std::cout << "CELL = Ace110" << std::endl;
         factoryCell = new FactoryCellACE110(); 
       } else if (strcmp(rawCellType, "Life23_3") == 0) {
         factoryCell = new FactoryCellLife23_3(); 
@@ -139,9 +135,9 @@ Lattice* LatticeFactory::generateLattice(int argc, char* argv[]) {
   } else {
     throw std::exception();
   }
-  std::cout << "voy a buildear" << std::endl;
+
+  // Se cargan los datos desde fichero
   lattice->buildLattice();
-  std::cout << "BUILDEADO" << std::endl;
   return lattice;
 }
 

@@ -2,11 +2,8 @@
 #include "../include/stateDead.h"
 
 Cell::Cell(Position& position, State& state){
-  // std::cout << "Initializing cell " <<  std::endl;
   this->state = state.clone();
   this->position = position.clone();
-  // this->nState = new StateDead();
-  // std::cout << "Initialized cell " << this->state->print() << " pos " << this->position->operator[](0) <<  std::endl;
 }
 
 Cell::~Cell(void){

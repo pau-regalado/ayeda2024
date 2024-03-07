@@ -5,9 +5,7 @@ Lattice2D_periodic::Lattice2D_periodic(const char* filename, const FactoryCell& 
   : Lattice2D(filename, f) {
 }
 
-Lattice2D_periodic::~Lattice2D_periodic(){
-  std::cout << "Destruyo Lattice2D_periodic" << std::endl; 
-}
+Lattice2D_periodic::~Lattice2D_periodic(){ }
 
 // Devuelve la celula en la posicion indicada. periodicBorder no calcula nada
 Cell& Lattice2D_periodic::getCell(const Position& position){

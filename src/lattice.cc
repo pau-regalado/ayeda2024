@@ -13,10 +13,8 @@ Lattice::Lattice(const char* filename, const FactoryCell& f) {
   if (!file.is_open()) {
     throw std::runtime_error("Error al abrir el archivo.");
   }
-  // this->buildLattice(file);
   this->filename = fl;
   this->cellFactory = &f;
-  std::cout << "Creada BASE" << std::endl;
 }
 
 
@@ -29,7 +27,6 @@ Cell& Lattice::operator[](const Position& p) {
 }
 
 void Lattice::setCell(const Position& p, Cell& cell) {
-  //std::cout << "EN SET CELL" << std::endl;
   this->getCell(p) = cell;
 }
 
@@ -39,14 +36,14 @@ std::ostream& operator<<(std::ostream& os, Lattice &g) {
 }
 
 Lattice::~Lattice() {
-  std::cout << "Adios" << std::endl;
+  delete this->cellFactory;
+  std::cout << "See you soon!" << std::endl;
 }
 
 void Lattice::nextGeneration(void) {
   this->currentIteration++;
   this->calculateNextGeneration();
   this->nextGenerationSpecific();
-  this->print();
 }
 
 void Lattice::nextFiveGenerations(void) {

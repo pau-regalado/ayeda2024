@@ -38,9 +38,7 @@ void Lattice2D::buildLattice() {
   }
 }
 
-Lattice2D::~Lattice2D() {
-  std::cout << "Destruyo Lattice2D" << std::endl;
-}
+Lattice2D::~Lattice2D() { }
 
 void Lattice2D::calculateNextGeneration(void) {
   for (int i = 0; i < this->row; i++) {
@@ -57,6 +55,7 @@ void Lattice2D::calculateNextGeneration(void) {
 }
 
 void Lattice2D::saveLatticeDataIntoAFile(std::ofstream& f) {
+  f << 2 << std::endl; 
   f << this->row << std::endl;
   f << this->col << std::endl;
 

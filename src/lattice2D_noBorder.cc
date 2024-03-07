@@ -7,9 +7,7 @@ Lattice2D_noBorder::Lattice2D_noBorder(const char* filename, const FactoryCell& 
   this->border = f.createCell(*(new PositionDim<1>(1, 0)), *(new StateDead()));
 }
 
-Lattice2D_noBorder::~Lattice2D_noBorder(){
-  std::cout << "Destruyo Lattice2D_noBorder" << std::endl; 
-}
+Lattice2D_noBorder::~Lattice2D_noBorder(){ }
 
 void Lattice2D_noBorder::resetExpansionStatus() {
   this->expandedNorth = false;
@@ -23,11 +21,9 @@ void Lattice2D_noBorder::nextGenerationSpecific(void) {
     this->updatePositions();
   }
   this->resetExpansionStatus();
-  std::cout << "LIMPIA" << std::endl;
 }
 
 Cell& Lattice2D_noBorder::getCell(const Position& p){
-  // std::cout << "GETCELL" << std::endl;
   int x = p[0];
   int y = p[1];
   if (x < 0 || x >= row || y < 0 || y >= col) {
@@ -63,31 +59,25 @@ void Lattice2D_noBorder::expandBorders(const Position& p) {
       this->expandEast();
       this->expandedEast = true;
   }
-  std::cout << "SALGO" << std::endl;
 }
 
 void Lattice2D_noBorder::expandNorth() {
-  std::cout << "EXPAND NORTH" << std::endl;
   this->lattice.insert(this->lattice.begin(), std::vector<Cell*>(
     this->col, 
     this->cellFactory->createCell(*(new PositionDim<2>(2, 0, 0)), *(new StateDead()))
   ));
   this->row++;
-  std::cout << "EXPAND NORTH CHECK" << std::endl;
 }
 
 void Lattice2D_noBorder::expandSouth() {
-  std::cout << "EXPAND SOUTH" << std::endl;
   this->lattice.insert(this->lattice.end(), std::vector<Cell*>(
     this->col, 
     this->cellFactory->createCell(*(new PositionDim<2>(2, 0, 0)), *(new StateDead()))
   ));
   this->row++;
-  std::cout << "EXPAND SOUTH CHECK" << std::endl;
 }
 
 void Lattice2D_noBorder::expandWest() {
-  std::cout << "EXPAND WEST" << std::endl;
   for(int i = 0; i < this->row; i++) {
       this->lattice[i].insert(
         this->lattice[i].begin(),
@@ -95,11 +85,9 @@ void Lattice2D_noBorder::expandWest() {
       );
   }
   this->col++;
-  std::cout << "EXPAND WEST CHECK" << std::endl;
 }
 
 void Lattice2D_noBorder::expandEast() {
-  std::cout << "EXPAND EAST" << std::endl;
   for(int i = 0; i < this->row; i++) {
     this->lattice[i].insert(
       this->lattice[i].end(),
@@ -107,7 +95,6 @@ void Lattice2D_noBorder::expandEast() {
     );
   }
   this->col++;
-  std::cout << "EXPAND EAST CHECK" << std::endl;
 }
 
 void Lattice2D_noBorder::updatePositions() {

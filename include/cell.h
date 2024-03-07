@@ -44,7 +44,7 @@ class Cell{
 
         // Asigna el estado siguiente
         nState = &other.getNextState();
-
+        
         // Asigna la posición
         position = &other.getPosition();
     }

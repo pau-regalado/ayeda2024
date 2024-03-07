@@ -13,9 +13,9 @@ Lattice::Lattice(const char* filename, const FactoryCell& f) {
   if (!file.is_open()) {
     throw std::runtime_error("Error al abrir el archivo.");
   }
-
   // this->buildLattice(file);
   this->dataFile = &file;
+  std::cout << "Creada BASE" << std::endl;
 }
 
 

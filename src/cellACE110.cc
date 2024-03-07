@@ -2,7 +2,9 @@
 #include "../include/lattice.h"
 
 CellACE110::CellACE110(const Position& position, const State& state)
-  : CellACE(position, state) { }
+  : CellACE(position, state) {
+    std::cout << "Cree CellACE110" << std::endl;
+   }
 
 CellACE110::~CellACE110() { }
 

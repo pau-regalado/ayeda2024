@@ -44,6 +44,7 @@ Lattice* LatticeFactory::generateLattice(int argc, char* argv[]) {
       } else {
         throw ParsingException();
       }
+      std::cout << "SIZE = " << aux << std::endl;
     } else if (strcmp(argv[i], "-border") == 0 && i + 1 < argc) {
       char* rawBorderType = argv[++i];
       /*if (strcmp(rawBorderType, "periodic") == 0) {
@@ -61,13 +62,14 @@ Lattice* LatticeFactory::generateLattice(int argc, char* argv[]) {
           initialCellState = std::stoi(argv[++i]);
           if (initialCellState == 0 || initialCellState == 1) {
             latticeType = latticeTypes::OPEN_BORDER;
+            std::cout << "BORDER = OPEN" << std::endl;
             typeCheck = true;
           }
         }
       }
     } else if (strcmp(argv[i], "-init") == 0 && i + 1 < argc) {
-      std::cout << "file" << std::endl;
       filename = argv[++i];
+      std::cout << "FILE = " << filename << std::endl;
     } else if (strcmp(argv[i], "-dim") == 0 && i + 1 < argc) {
       dim = std::stoi(argv[i + 1]);
       if (dim > 0) {
@@ -75,11 +77,13 @@ Lattice* LatticeFactory::generateLattice(int argc, char* argv[]) {
       } else {
         throw BadArgumentException();
       }
+      std::cout << "DIM = " << dim << std::endl;
     } else if (strcmp(argv[i], "-cell") == 0 && i + 1 < argc) {
       char* rawCellType = argv[++i];
       if (strcmp(rawCellType, "Ace30") == 0) {
         factoryCell = new FactoryCellACE30(); 
-      } else if (strcmp(rawCellType, "Ace100") == 0) {
+      } else if (strcmp(rawCellType, "Ace110") == 0) {
+        std::cout << "CELL = Ace110" << std::endl;
         factoryCell = new FactoryCellACE110(); 
       } else if (strcmp(rawCellType, "Life23_3") == 0) {
         factoryCell = new FactoryCellLife23_3(); 
@@ -117,7 +121,9 @@ Lattice* LatticeFactory::generateLattice(int argc, char* argv[]) {
       };*/
       case latticeTypes::OPEN_BORDER: {
         if (1) {
+          std::cout << "Creo OPEN 1D" << std::endl;
           this->lattice = new Lattice1D_open(filename.c_str(), *factoryCell, 1);
+          std::cout << "He creado OPEN 1D" << std::endl;
         } else {
           this->lattice = new Lattice2D_open(filename.c_str(), *factoryCell, 1);
         } 

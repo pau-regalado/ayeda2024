@@ -9,11 +9,11 @@ LIB     := lib
 LIBRARIES   := 
 EXECUTABLE  := main
 PARAMS	:= -size 10 10 -border open 1
-PARAMSFILE	:=  -border nonborders -init new.txt
+PARAMSFILE	:=  -dim 1 -size 25 -cell Ace110 -border open 1 -init 1D_25.txt
 SOURCES := $(wildcard $(SRC)/*.cc)
 OBJS	:= $(patsubst $(SRC)/%.cc,$(BUILD)/%.o,$(SOURCES))
 
-.PHONY: all project run clean file
+.PHONY: all project run clean file25
 
 all: $(BIN)/$(EXECUTABLE)
 
@@ -34,7 +34,7 @@ run:
 	@echo "🚀 Executing..."
 	./$(BIN)/$(EXECUTABLE) $(PARAMS)
 
-file:
+file25:
 	@echo "🚀 Executing..."
 	./$(BIN)/$(EXECUTABLE) $(PARAMSFILE)
 

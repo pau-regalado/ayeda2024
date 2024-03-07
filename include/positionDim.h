@@ -14,12 +14,14 @@ class PositionDim: public Position {
       if(sz != Dim) {
         throw Ac_Exception();
       }
+      std::cout << "En position sz = " << sz << std::endl;
       va_list vl;
       va_start(vl, sz);
-      for(int d=0; d<Dim; d++) {       
+      for(int d = 0; d < sz; d++) {       
         Coordinates[d] = va_arg(vl, Coordinate_t);
       }
       va_end(vl);
+      std::cout << "En position | Sali del for" << std::endl;
     }
     
     Coor_t operator[](unsigned int i) const {

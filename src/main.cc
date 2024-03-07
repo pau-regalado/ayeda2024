@@ -16,8 +16,14 @@ int main(int argc, char* argv[]) {
     std::cerr << "Error: " << e.what() << std::endl;
     return 1;
   }
-
+  /*
   Simulator simulator(lattice);
-  simulator.start();
+  try {
+    simulator.start();
+  } catch (const std::exception& e) {
+    std::cerr << "Error: " << e.what() << std::endl;
+    return 1;
+  }*/
+  
   return 0;
 }

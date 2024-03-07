@@ -1,9 +1,11 @@
 #include "../include/cell.h"
 #include "../include/stateDead.h"
 
-Cell::Cell(const Position& position, const State& state){
-  *(this->state) = state; 
-  *(this->position) = position;
+Cell::Cell(const Position& position, const State& state) {
+  std::cout << "Initializing cell " <<  std::endl;
+  *this->state = state; 
+  *this->position = position;
+  std::cout << "Initialized cell " << state <<  std::endl;
 }
 
 Cell::~Cell(void){

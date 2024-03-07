@@ -5,21 +5,27 @@
 #include "../include/stateAlive.h"
 
 Lattice1D::Lattice1D(const char* filename, const FactoryCell& f)
-  : Lattice(filename, f) { }
+  : Lattice(filename, f) { 
+    std::cout << "Construyendo Lattice1D" << std::endl;
+  }
 
 void Lattice1D::buildLattice() {
   // Por ahora es para descartar la primera linea del fichero, dimension
-  *dataFile >> this->size;
+  std::cout << "Voy a leer" << std::endl;
+  std::ifstream file("dataFile/" + this->filename);
+  file >> this->size;
+  std::cout << "SIZE MALO =  " << this->size << std::endl;
 
-  *dataFile >> this->size;
-
+  file >> this->size;
+  std::cout << "SIZE BUENO =  " << this->size << std::endl;
   this->lattice.resize(this->size);
   // for (int i = 0; i < this->size; i++) {
   //   this->lattice[i].setPosition(new PositionDim<1>(i));
   // }
 
   std::string line;
-  *dataFile >> line;
+  file >> line;
+  std::cout << "Line " << line << std::endl;
 
   for (int i = 0; i < size; ++i) {
     State* state;
@@ -30,10 +36,12 @@ void Lattice1D::buildLattice() {
     } else {
       throw InvalidCharacterException();
     }
-    this->setCell(PositionDim<1>(1, i), *(this->cellFactory->createCell(PositionDim<1>(1, i), *state)));
+    std::cout << "Creo cell en " << i << " Estado " << line[i] << std::endl;
+    PositionDim<1> pos(1, i);
+    this->setCell(pos, *(this->cellFactory->createCell(pos, *state)));
+    std::cout << "CELULA CREADA" << std::endl;
   }
 }
-
 
 Lattice1D::~Lattice1D() {
   std::cout << "Destruccion Lattice1D" << std::endl;

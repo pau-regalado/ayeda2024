@@ -5,10 +5,11 @@ Lattice2D::Lattice2D(const char* filename, const FactoryCell& f)
   : Lattice(filename, f) { }
 
 void Lattice2D::buildLattice() {
+  std::ifstream file("dataFile/" + this->filename);
   // Por ahora es para descartar la primera linea del fichero, dimension
-  *dataFile >> this->row;
+  file >> this->row;
 
-  *dataFile >> this->row >> this->col;
+  file >> this->row >> this->col;
 
   this->lattice.resize(this->row);
   for (int i = 0; i < this->row; i++) {
@@ -20,7 +21,7 @@ void Lattice2D::buildLattice() {
 
   for (int i = 0; i < this->row; ++i) {
     std::string line;
-    *dataFile >> line;
+    file >> line;
     for (int j = 0; j < this->col; ++j) {
       State* state;
       if (line[i] == '0') {
@@ -30,7 +31,7 @@ void Lattice2D::buildLattice() {
       } else {
         throw InvalidCharacterException();
       }
-      this->setCell(PositionDim<2>(2, i, j), *(this->cellFactory->createCell(PositionDim<2>(2, i, j), *state)));
+      this->setCell(PositionDim<2>(2, i, j), *(this->cellFactory->createCell(*(new PositionDim<2>(2, i, j)), *state)));
     }
   }
 }

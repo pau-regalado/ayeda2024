@@ -14,7 +14,8 @@ Lattice::Lattice(const char* filename, const FactoryCell& f) {
     throw std::runtime_error("Error al abrir el archivo.");
   }
   // this->buildLattice(file);
-  this->dataFile = &file;
+  this->filename = fl;
+  
   std::cout << "Creada BASE" << std::endl;
 }
 
@@ -28,6 +29,7 @@ Cell& Lattice::operator[](const Position& p) {
 }
 
 void Lattice::setCell(const Position& p, Cell& cell) {
+  std::cout << "EN SET CELL" << std::endl;
   this->operator[](p) = cell;
 }
 

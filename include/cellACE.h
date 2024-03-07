@@ -11,7 +11,7 @@ class CellACE : public Cell {
 private:
   std::vector<PositionDim<1>> neighbours = {{-1}, {1}};
 public:
-  CellACE(const Position& position, const State& state);
+  CellACE(Position& position, State& state);
   ~CellACE();
 
   // virtual int nextState(Lattice& lattice) = 0;

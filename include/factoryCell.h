@@ -9,27 +9,27 @@
 class FactoryCell {
   public:
     // Método creador de células
-    virtual Cell* createCell(const Position&, const State&) const = 0;
+    virtual Cell* createCell(Position& position, State& state) const = 0;
 };
 
 class FactoryCellACE110: public FactoryCell {
   public:
-    Cell* createCell(const Position& p,const State& s) const { return new CellACE110(p, s);}
+    Cell* createCell(Position& p, State& s) const { return new CellACE110(p, s);}
 };
 
 class FactoryCellACE30: public FactoryCell {
   public:
-    Cell* createCell(const Position& p,const State& s) const { return new CellACE30(p, s);}
+    Cell* createCell(Position& p, State& s) const { return new CellACE30(p, s);}
 };
 
 class FactoryCellLife23_3: public FactoryCell {
   public:
-    Cell* createCell(const Position& p,const State& s) const { return new CellLife23_3(p, s);}
+    Cell* createCell(Position& p, State& s) const { return new CellLife23_3(p, s);}
 };
 
 class FactoryCellLife51_346: public FactoryCell {
   public:
-    Cell* createCell(const Position& p,const State& s) const { return new CellLife51_346(p, s);}
+    Cell* createCell(Position& p, State& s) const { return new CellLife51_346(p, s);}
 };
 
 #endif

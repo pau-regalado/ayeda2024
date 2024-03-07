@@ -2,7 +2,7 @@
 #include "../include/stateDead.h"
 #include "../include/stateAlive.h"
 
-CellLife::CellLife(const Position& position, const State& state)
+CellLife::CellLife(Position& position, State& state)
     : Cell(position, state){}
 
 CellLife::~CellLife() {}

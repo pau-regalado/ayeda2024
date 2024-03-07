@@ -4,10 +4,11 @@
 Lattice1D_open::Lattice1D_open(const char* filename, const FactoryCell& f, int initialCellState)
   : Lattice1D(filename, f) {
   if (initialCellState == 0) {
-    this->border = f.createCell(PositionDim<1>(1, 0), StateDead());
+    this->border = f.createCell(*(new PositionDim<1>(1, 0)), *(new StateDead()));
   } else if (initialCellState == 1) {
+    f.createCell(*(new PositionDim<1>(1, 0)), *(new StateAlive()));
     std::cout << "Creo pos" << std::endl;
-    this->border = f.createCell(PositionDim<1>(1, 0), StateAlive());
+    this->border = f.createCell(*(new PositionDim<1>(1, 0)), *(new StateAlive()));
     std::cout << "He creaado pos" << std::endl;
   } else {
     throw InvalidCellTypeException();

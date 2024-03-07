@@ -1,7 +1,7 @@
 #include "../include/cellLife51_346.h"
 #include "../include/stateAlive.h"
 
-CellLife51_346::CellLife51_346(const Position& position, const State& state): CellLife(position, state) {}
+CellLife51_346::CellLife51_346(Position& position, State& state): CellLife(position, state) {}
 
 CellLife51_346::~CellLife51_346() {}
 

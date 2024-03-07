@@ -18,7 +18,7 @@ class Cell{
   public:
 
     // Cell();
-    Cell(const Position& position, const State& state);
+    Cell(Position& position, State& state);
     ~Cell(void);
 
     State& getState(void) const;

@@ -11,9 +11,6 @@ class PositionDim: public Position {
     Coordinate_t Coordinates[Dim];
   public:
     PositionDim(int sz, ...) {
-      if(sz != Dim) {
-        throw Ac_Exception();
-      }
       std::cout << "En position sz = " << sz << std::endl;
       va_list vl;
       va_start(vl, sz);
@@ -25,9 +22,9 @@ class PositionDim: public Position {
     }
     
     Coor_t operator[](unsigned int i) const {
-      if (i >= Dim) {
-        throw Ac_Exception();
-      }
+      // if (i >= Dim) {
+      //   throw Ac_Exception();
+      // }
       return this->Coordinates[i];
     }
 };

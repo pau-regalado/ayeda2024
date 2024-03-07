@@ -1,7 +1,9 @@
 #include "../include/cellACE.h"
 #include "../include/lattice.h"
 
-CellACE::CellACE(const Position& position, const State& state) : Cell(position, state) {}
+CellACE::CellACE(Position& position, State& state) : Cell(position, state) {
+  std::cout << "Cree CellACE" << std::endl;
+}
 
 CellACE::~CellACE() {}
 

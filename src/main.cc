@@ -5,6 +5,7 @@
 
 #include "../include/simulator.h"
 #include "../include/latticeFactory.h"
+#include "../include/error.h"
 
 int main(int argc, char* argv[]) {
     
@@ -12,8 +13,8 @@ int main(int argc, char* argv[]) {
   LatticeFactory latticeFactory;
   try {
     lattice = latticeFactory.generateLattice(argc, argv);
-  } catch (const std::exception& e) {
-    std::cerr << "Error: " << e.what() << std::endl;
+  } catch (Error& e) {
+    std::cerr << "Error: " << e.whats() << std::endl;
     return 1;
   }
   /*

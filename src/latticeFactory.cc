@@ -122,7 +122,7 @@ Lattice* LatticeFactory::generateLattice(int argc, char* argv[]) {
       case latticeTypes::OPEN_BORDER: {
         if (1) {
           std::cout << "Creo OPEN 1D" << std::endl;
-          this->lattice = new Lattice1D_open(filename.c_str(), *factoryCell, 1);
+          this->lattice = new Lattice1D_open(filename.c_str(), *factoryCell, 0);
           std::cout << "He creado OPEN 1D" << std::endl;
         } else {
           this->lattice = new Lattice2D_open(filename.c_str(), *factoryCell, 1);
@@ -135,7 +135,9 @@ Lattice* LatticeFactory::generateLattice(int argc, char* argv[]) {
   } else {
     throw std::exception();
   }
+  std::cout << "voy a buildear" << std::endl;
   lattice->buildLattice();
+  std::cout << "BUILDEADO" << std::endl;
   return lattice;
 }
 

@@ -5,9 +5,9 @@ Lattice2D_open::Lattice2D_open(const char* filename, const FactoryCell& f, int i
   : Lattice2D(filename, f) {
 
   if (initialCellState == 0) {
-    this->border = f.createCell(PositionDim<2>(2, 0, 0), StateDead());
+    this->border = f.createCell(*(new PositionDim<2>(2, 0, 0)), *(new StateDead()));
   } else if (initialCellState == 1) {
-    this->border = f.createCell(PositionDim<2>(2, 0, 0), StateAlive());
+    this->border = f.createCell(*(new PositionDim<2>(2, 0, 0)), *(new StateAlive()));
   } else {
     throw InvalidCellTypeException();
   }

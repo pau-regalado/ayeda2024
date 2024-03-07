@@ -18,7 +18,7 @@ class Lattice{
     bool onlyPopulationMode;
     int currentIteration;
     const FactoryCell* cellFactory;
-    std::ifstream* dataFile;
+    std::string filename;
 
   public:
     Lattice(const char* filename, const FactoryCell& f);

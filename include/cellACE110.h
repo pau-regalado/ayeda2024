@@ -5,7 +5,7 @@
 
 class CellACE110 : public CellACE {
 public:
-  CellACE110(const Position& position, const State& state);
+  CellACE110(Position& position, State& state);
   ~CellACE110();
   
   int nextState(Lattice& lattice);

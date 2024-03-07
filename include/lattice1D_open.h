@@ -6,8 +6,8 @@
 
 class Lattice1D_open: public Lattice1D {
   public:
-    Lattice1D_open(const char* filename, const FactoryCell& f, int initialCellState = 0): Lattice1D(filename, f){}
-    ~Lattice1D_open(){}
+    Lattice1D_open(const char* filename, const FactoryCell& f, int initialCellState = 0);
+    ~Lattice1D_open();
 
     Cell& getCell(const Position& p);
     const Cell& getCell(const Position& p) const;
@@ -15,7 +15,7 @@ class Lattice1D_open: public Lattice1D {
     void nextGenerationSpecific(void) {}
 
     private:
-      CellACE30 border;
+      Cell* border;
 };
 
 #endif

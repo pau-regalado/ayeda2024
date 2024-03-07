@@ -17,6 +17,7 @@ class Lattice{
 
     bool onlyPopulationMode;
     int currentIteration;
+    const FactoryCell* cellFactory;
 
   public:
     Lattice(const char* filename, const FactoryCell& f);

@@ -29,3 +29,17 @@ class BadArgumentException : public Error {
       return "Bad arguments";
     }
 };
+
+class InvalidCharacterException : public Error {
+  public:
+    std::string what() {
+      return "Invalid character in lattice specification file";
+    }
+};
+
+class InvalidCellTypeException : public Error {
+  public:
+    std::string what() {
+      return "Invalid cell type";
+    }
+};

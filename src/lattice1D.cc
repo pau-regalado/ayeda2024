@@ -11,21 +11,23 @@ Lattice1D::Lattice1D(const char* filename, const FactoryCell& f)
 
 void Lattice1D::buildLattice() {
   // Por ahora es para descartar la primera linea del fichero, dimension
-  std::cout << "Voy a leer" << std::endl;
+  // std::cout << "Voy a leer" << std::endl;
   std::ifstream file("dataFile/" + this->filename);
   file >> this->size;
-  std::cout << "SIZE MALO =  " << this->size << std::endl;
+  // std::cout << "SIZE MALO =  " << this->size << std::endl;
 
   file >> this->size;
-  std::cout << "SIZE BUENO =  " << this->size << std::endl;
+  // std::cout << "SIZE BUENO =  " << this->size << std::endl;
   this->lattice.resize(this->size);
-  // for (int i = 0; i < this->size; i++) {
-  //   this->lattice[i].setPosition(new PositionDim<1>(i));
-  // }
+  for (int i = 0; i < this->size; i++) {
+    PositionDim<1> position(1, i);
+    StateDead state;
+    this->lattice[i] = this->cellFactory->createCell(position, state);
+  }
 
   std::string line;
   file >> line;
-  std::cout << "Line " << line << std::endl;
+  // std::cout << "Line " << line << std::endl;
 
   for (int i = 0; i < size; ++i) {
     State* state;
@@ -36,10 +38,13 @@ void Lattice1D::buildLattice() {
     } else {
       throw InvalidCharacterException();
     }
-    std::cout << "Creo cell en " << i << " Estado " << line[i] << std::endl;
+    // std::cout << "Creo cell en " << i << " Estado " << line[i] << std::endl;
     PositionDim<1> pos(1, i);
-    this->setCell(pos, *(this->cellFactory->createCell(pos, *state)));
-    std::cout << "CELULA CREADA" << std::endl;
+    // std::cout << "posicion CREADA" << std::endl;
+    Cell* c = this->cellFactory->createCell(pos, *state);
+    // std::cout << "CELULA CREADA" << std::endl;
+    this->setCell(pos, *c);
+    // std::cout << "CELULA GUARDADA" << std::endl;
   }
 }
 
@@ -49,6 +54,7 @@ Lattice1D::~Lattice1D() {
 
 void Lattice1D::calculateNextGeneration(void) {
   for (int i = 0; i < this->size; i++) {
+    this->lattice[i]->setPosition(PositionDim<1>(1, i));  
     this->lattice[i]->nextState(*this);  
   }
  
@@ -68,7 +74,7 @@ std::size_t Lattice1D::getPopulation() const {
 std::string Lattice1D::printLattice() {
   std::cout << "⬛";
   for (int i = 0; i < this->size; i++) { 
-    std::cout << this->lattice[i];
+    std::cout << *this->lattice[i];
   }
   std::cout << "⬛" << std::endl;
   return "";

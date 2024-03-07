@@ -36,5 +36,19 @@ class Cell{
     void updateState();
     std::ostream& display(std::ostream&) const;
     friend std::ostream& operator<<(std::ostream& os, const Cell& cell);
+
+    Cell& operator=(const Cell& other) {
+    if (this != &other) { // Verifica si no estás asignando el mismo objeto
+        // Asigna el estado actual
+        state = &other.getState();
+
+        // Asigna el estado siguiente
+        nState = &other.getNextState();
+
+        // Asigna la posición
+        position = &other.getPosition();
+    }
+    return *this;
+}
 };
 #endif

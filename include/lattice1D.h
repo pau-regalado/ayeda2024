@@ -28,7 +28,7 @@
       // void setCell(Position& position, Cell& cell);
       // virtual void nextGenerationSpecific(void) = 0;
       
-      std::string printSize() { return "" + size; }
+      std::string printSize() { return std::to_string(size); }
       std::string printLattice();
       void calculateNextGeneration(void);
       void saveLatticeDataIntoAFile(std::ofstream& f);

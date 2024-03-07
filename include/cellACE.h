@@ -9,7 +9,7 @@
 
 class CellACE : public Cell {
 private:
-  std::vector<PositionDim<1>> neighbours = {{-1}, {1}};
+  std::vector<PositionDim<1>> neighbours = {PositionDim<1>(1, -1), PositionDim<1>(1, 1)};
 public:
   CellACE(Position& position, State& state);
   ~CellACE();

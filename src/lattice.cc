@@ -15,7 +15,7 @@ Lattice::Lattice(const char* filename, const FactoryCell& f) {
   }
   // this->buildLattice(file);
   this->filename = fl;
-  
+  this->cellFactory = &f;
   std::cout << "Creada BASE" << std::endl;
 }
 
@@ -30,7 +30,7 @@ Cell& Lattice::operator[](const Position& p) {
 
 void Lattice::setCell(const Position& p, Cell& cell) {
   std::cout << "EN SET CELL" << std::endl;
-  this->operator[](p) = cell;
+  this->getCell(p) = cell;
 }
 
 std::ostream& operator<<(std::ostream& os, Lattice &g) {

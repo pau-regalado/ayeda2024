@@ -8,6 +8,7 @@ CellACE110::CellACE110(Position& position, State& state): CellACE(position, stat
 CellACE110::~CellACE110() { }
 
 int CellACE110::nextState(Lattice& lattice) {
+  std::cout << "next state 110" << std::endl;
   int L = this->getLeftNeightbourStateValue(lattice);
   int R = this->getRightNeightbourStateValue(lattice);
   // Otra Formula

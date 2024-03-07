@@ -14,7 +14,9 @@ class FactoryCell {
 
 class FactoryCellACE110: public FactoryCell {
   public:
-    Cell* createCell(Position& p, State& s) const { return new CellACE110(p, s);}
+    Cell* createCell(Position& p, State& s) const { 
+      return new CellACE110(p, s);
+     }
 };
 
 class FactoryCellACE30: public FactoryCell {

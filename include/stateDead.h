@@ -7,8 +7,7 @@
 class StateDead: public State {  
   public:
     StateDead(): State(0){}
-    ~StateDead(){std::cout << "Destruyo muerta" <<  std::endl;}
-    State* nextState(int vivas);
+    ~StateDead(){}
     std::string print() const;
     State* clone() const {return new StateDead();}
 };

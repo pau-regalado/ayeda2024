@@ -7,8 +7,7 @@
 class StateAlive: public State {
   public:
     StateAlive(): State(1){}
-    ~StateAlive(){std::cout << "Destruyo viva" <<  std::endl;}
-    State* nextState(int vivas);
+    ~StateAlive(){}
     std::string print() const;
     State* clone() const {return new StateAlive();}
 };

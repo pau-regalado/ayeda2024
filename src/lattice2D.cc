@@ -14,9 +14,11 @@ void Lattice2D::buildLattice() {
   this->lattice.resize(this->row);
   for (int i = 0; i < this->row; i++) {
     this->lattice[i].resize(this->col);
-    // for (int j = 0; j < this->col; j++) {
-    //   this->lattice[i][j].setPosition(new Position(i, j));
-    // }
+    for (int j = 0; j < this->col; j++) {
+      PositionDim<2>* position = new PositionDim<2>(2, i, j);
+      StateDead state;
+      this->lattice[i][j] = this->cellFactory->createCell(*position, state);
+    }
   }
 
   for (int i = 0; i < this->row; ++i) {
@@ -24,9 +26,9 @@ void Lattice2D::buildLattice() {
     file >> line;
     for (int j = 0; j < this->col; ++j) {
       State* state;
-      if (line[i] == '0') {
+      if (line[j] == '0') {
         state = new StateDead();
-      } else if (line[i] == '1') {
+      } else if (line[j] == '1') {
         state = new StateAlive();                   
       } else {
         throw InvalidCharacterException();
@@ -86,7 +88,7 @@ std::string Lattice2D::printLattice() {
   for (int i = 0; i < this->row; i++) {
     std::cout << "⬛";
     for (int j = 0; j < this->col; j++) {
-      std::cout << this->lattice[i][j];
+      std::cout << *this->lattice[i][j];
     }
     std::cout << "⬛" << std::endl;
   }

@@ -1,11 +1,15 @@
 #include "../include/latticeFactory.h"
 #include "../include/factoryCell.h"
-#include "../include/lattice2D_open.h"
 
 #include "../include/lattice1D_open.h"
 #include "../include/lattice1D_reflective.h"
 #include "../include/lattice1D_periodic.h"
 #include "../include/lattice1D_noBorder.h"
+
+#include "../include/lattice2D_open.h"
+#include "../include/lattice2D_periodic.h"
+#include "../include/lattice2D_reflective.h"
+#include "../include/lattice2D_noBorder.h"
 
 #include "../include/stateDead.h"
 #include "../include/stateAlive.h"
@@ -98,35 +102,34 @@ Lattice* LatticeFactory::generateLattice(int argc, char* argv[]) {
   if (!filename.empty() || dimCheck && typeCheck) {
     switch (latticeType) {
       case latticeTypes::PERIODIC_BORDER: {
-        if (!filename.empty()) {
+        if (!filename.empty() && dim == 1) {
           this->lattice = new Lattice1D_periodic(filename.c_str(), *factoryCell);
         } else {
-          // this->lattice = new LatticePeriodicBorder(row, col);
+          this->lattice = new Lattice2D_periodic(filename.c_str(), *factoryCell);
         }          
         break;
       };
       case latticeTypes::NON_BORDERS: {
-        if (!filename.empty()) {
+        if (!filename.empty() && dim == 1) {
           this->lattice = new Lattice1D_noBorder(filename.c_str(), *factoryCell);
         } else {
-          // this->lattice = new LatticeNonBorders(row, col);
+          this->lattice = new Lattice2D_noBorder(filename.c_str(), *factoryCell);
         }          
         break;
       };
       case latticeTypes::REFLECTIVE_BORDER: {
-        if (!filename.empty()) {
+        if (!filename.empty() && dim == 1) {
           this->lattice = new Lattice1D_reflective(filename.c_str(), *factoryCell);
         } else {
+          this->lattice = new Lattice2D_reflective(filename.c_str(), *factoryCell);
         } 
         break;
       };
       case latticeTypes::OPEN_BORDER: {
-        if (1) {
-          std::cout << "Creo OPEN 1D" << std::endl;
-          this->lattice = new Lattice1D_open(filename.c_str(), *factoryCell, 1);
-          std::cout << "He creado OPEN 1D" << std::endl;
+        if (!filename.empty() && dim == 1) {
+          this->lattice = new Lattice1D_open(filename.c_str(), *factoryCell, initialCellState);
         } else {
-          this->lattice = new Lattice2D_open(filename.c_str(), *factoryCell, 1);
+          this->lattice = new Lattice2D_open(filename.c_str(), *factoryCell, initialCellState);
         } 
         break;
       };

@@ -7,10 +7,18 @@ CellLife51_346::~CellLife51_346() {}
 
 int CellLife51_346::nextState(Lattice& lattice) {
   int aliveNeighbours = this->countAliveNeighbours(lattice);
-  if ((aliveNeighbours == 1) || (aliveNeighbours == 4)){
-    this->nState = new StateAlive();
+  if (this->getStateInt()) {
+    if ((aliveNeighbours == 1) || (aliveNeighbours == 5)){
+      this->nState = new StateAlive();
+    } else {
+      this->nState = new StateDead();
+    }
   } else {
-    this->nState = new StateDead();
+    if ((aliveNeighbours == 3) || (aliveNeighbours == 4) || (aliveNeighbours == 6)){
+      this->nState = new StateAlive();
+    } else {
+      this->nState = new StateDead();
+    }
   }
   return 0;
 }

@@ -30,7 +30,7 @@ class Cell{
     const int getStateInt(void) const;
     
     Position& getPosition(void) const;
-    void setPosition(const Position& position);
+    void setPosition(Position& position);
     
     virtual int nextState(Lattice& lattice) = 0;
     void updateState();

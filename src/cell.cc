@@ -3,8 +3,8 @@
 
 Cell::Cell(Position& position, State& state){
   std::cout << "Initializing cell " <<  std::endl;
-  this->state = &state; 
-  this->position = &position;
+  this->state = &state;
+  this->position = position.clone();
   std::cout << "Initialized cell " << this->state->print() << " pos " << this->position->operator[](0) <<  std::endl;
 }
 
@@ -48,8 +48,8 @@ Position& Cell::getPosition(void) const {
   return *(this->position);
 }
 
-void Cell::setPosition(const Position& position){
-  *(this->position) = position;
+void Cell::setPosition(Position& position){
+  this->position = &position;
 }
 
 std::ostream& Cell::display(std::ostream& os) const {

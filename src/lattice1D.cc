@@ -20,9 +20,9 @@ void Lattice1D::buildLattice() {
   // std::cout << "SIZE BUENO =  " << this->size << std::endl;
   this->lattice.resize(this->size);
   for (int i = 0; i < this->size; i++) {
-    PositionDim<1> position(1, i);
+    PositionDim<1>* position = new PositionDim<1>(1, i);
     StateDead state;
-    this->lattice[i] = this->cellFactory->createCell(position, state);
+    this->lattice[i] = this->cellFactory->createCell(*position, state);
   }
 
   std::string line;
@@ -39,12 +39,12 @@ void Lattice1D::buildLattice() {
       throw InvalidCharacterException();
     }
     // std::cout << "Creo cell en " << i << " Estado " << line[i] << std::endl;
-    PositionDim<1> pos(1, i);
+    PositionDim<1>* pos = new PositionDim<1>(1, i);
     // std::cout << "posicion CREADA" << std::endl;
-    Cell* c = this->cellFactory->createCell(pos, *state);
+    Cell* c = this->cellFactory->createCell(*pos, *state);
     // std::cout << "CELULA CREADA" << std::endl;
-    this->setCell(pos, *c);
-    // std::cout << "CELULA GUARDADA" << std::endl;
+    this->setCell(*pos, *c);
+    std::cout << "CELULA GUARDADA" << std::endl;
   }
 }
 
@@ -54,7 +54,7 @@ Lattice1D::~Lattice1D() {
 
 void Lattice1D::calculateNextGeneration(void) {
   for (int i = 0; i < this->size; i++) {
-    this->lattice[i]->setPosition(PositionDim<1>(1, i));  
+    // this->lattice[i]->setPosition(PositionDim<1>(1, i));  
     this->lattice[i]->nextState(*this);  
   }
  

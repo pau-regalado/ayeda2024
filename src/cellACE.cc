@@ -9,8 +9,7 @@ CellACE::~CellACE() {}
 
 
 int CellACE::getLeftNeightbourStateValue(Lattice& lattice) {
-  std::cout << "Cojo vecino IZQ " << this->getState().print() << std::endl;
-  this->setPosition(PositionDim<1>(1, 4));
+  std::cout << "Cojo vecino IZQ " << this->getPosition()[0] + neighbours[0][0] << std::endl;
   PositionDim<1> position(1, this->getPosition()[0] + neighbours[0][0]);
   std::cout << "Creo la pos " << position[0] << std::endl;
   return lattice.getCell(position).getStateInt();
